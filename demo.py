@@ -69,7 +69,7 @@ stage = omni.usd.get_context().get_stage()
 
 # ── 씬 구성 요소(전부 비물리 시각+운동학 요소) ──
 crane = GantryCrane(stage)
-cockpit = CockpitRig(stage, parent_path=f"{crane.root}/Portal")  # 조종실은 포탈에 매달림
+cockpit = CockpitRig(stage, parent_path="/World")   # 조종실은 월드 고정(크레인 이동과 독립)
 yard.add_drop_zone(stage)
 magnet = MagnetController(scene["rebar"], device)
 source, source_name = make_source(args_cli.input)

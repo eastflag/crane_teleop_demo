@@ -1,6 +1,6 @@
 # 갠트리 크레인 원격조종 데모 (Isaac Lab)
 
-조종실에 앉은 로봇이 스틱 2개와 패들을 조종하면 야드의 갠트리 크레인이 움직이고,
+조종실 의자에 앉은 A3 로봇 앞의 스틱 2개와 페달 2개를 조종하면 야드의 갠트리 크레인이 움직이고,
 자석으로 철근을 흡착·운반하며, 패들을 밟으면 철근을 놓는 원격조종 데모 씬.
 
 ## 시나리오와 신호 흐름
@@ -35,7 +35,12 @@ yard.py / 철근                    씬에서 유일한 동적 물리 객체 (�
 | `cockpit.py` | 조종실(캐빈·콘솔·스틱·패들·시트) + 조종 로봇 IK |
 | `magnet_logic.py` | 자석 부착/운반/해제 |
 | `yard.py` | 철근 강체 컬렉션 + 드롭존 표시 |
-| `usd_utils.py` | USD 프리미티브 생성/갱신 헬퍼 |
+| `usd_utils.py` | USD 프리미티브 생성/갱신 헬퍼 + 애셋 로드 핸들 헬퍼 |
+| `make_cockpit_asset.py` | 조종실 USD 애셋 생성기(`assets/` 로 내보내기) |
+| `assets/cockpit.usd` | 조종실 애셋(`.usda`는 git diff용 텍스트 사본) |
+| `cockpit.py` `add_sitting_robot()` | A3 로봇 reference + 관절 FK로 착석 포즈 굽기 |
+| `raise_a3_ultra_t3d0/` | AgiBot A3 Ultra 로봇 USD(구조 3.0, Mulan PSL v2) |
+| `drawing/cockpit1_flat.png` | 조종실 외관 컨셉 도면(주황색 = 조이스틱/페달) |
 
 ## 설치 및 실행
 
@@ -53,6 +58,16 @@ yard.py / 철근                    씬에서 유일한 동적 물리 객체 (�
 
 # 무헤드 스모크 테스트(렌더 없이 N 스텝만)
 ./isaaclab.sh -p crane_teleop_demo/demo.py --input scripted --headless --max-steps 2400
+```
+
+조종실 구조물은 `assets/cockpit.usd` 애셋으로 분리되어 있다. demo.py는 애셋이
+있으면 reference로 로드하고(스틱·페달 애니메이션은 로드 후에도 동일하게 동작),
+없으면 절차적으로 생성한다. 애셋은 로봇(raise_a3_ultra_t3d0/)을 reference로
+포함하므로 같은 저장소에 폴더가 있어야 완전하다. `cockpit.py`의 구조를 바꿨으면
+아래로 재생성:
+
+```bash
+./isaaclab.sh -p crane_teleop_demo/make_cockpit_asset.py
 ```
 
 ## 조작 (게임패드)

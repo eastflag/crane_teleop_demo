@@ -97,6 +97,38 @@ def set_xform(op, pos, quat=(1.0, 0.0, 0.0, 0.0), scale=(1.0, 1.0, 1.0)):
     op.Set(m)
 
 
+# ═══════════════════ 애셋(.usd)에서 로드한 프림에 핸들 다시 묶기 ═══════════════════
+# 생성 헬퍼들은 만들면서 갱신용 op/attr을 돌려주지만, USD 애셋을 reference로
+# 로드한 프림은 같은 것을 프림에서 다시 꺼내야 한다. 층위는 로컬(참조하는 쪽)
+# 레이어가 참조보다 강하므로 op.Set()은 그대로 오버라이드로 기록된다.
+def get_op(prim, create=False):
+    """프림의 (유일한) transform op. create=True면 없을 때 새로 만든다."""
+    xf = UsdGeom.Xformable(prim)
+    ops = xf.GetOrderedXformOps()
+    if not ops and create:
+        return xf.AddTransformOp()
+    if not ops:
+        raise RuntimeError(f"transform op가 없는 프림: {prim.GetPath()}")
+    return ops[0]
+
+
+def attach_op(stage, path):
+    """로드된 프림의 transform op를 반환한다."""
+    prim = stage.GetPrimAtPath(path)
+    if not prim.IsValid():
+        raise RuntimeError(f"애셋에서 프림을 찾을 수 없음: {path}")
+    return get_op(prim)
+
+
+def attach_capsule(stage, path):
+    """로드된 캡슐을 place_segment용 튜플 (프림, op, height attr, 반지름)로 반환한다."""
+    prim = stage.GetPrimAtPath(path)
+    if not prim.IsValid():
+        raise RuntimeError(f"애셋에서 프림을 찾을 수 없음: {path}")
+    g = UsdGeom.Capsule(prim)
+    return g, get_op(prim), g.GetHeightAttr(), float(g.GetRadiusAttr().Get())
+
+
 # ═══════════════════════ 프리미티브 ═══════════════════════
 def group(stage, path, pos=(0.0, 0.0, 0.0), quat=(1.0, 0.0, 0.0, 0.0)):
     """빈 좌표계 그룹(계층 루트용). 반환값: 갱신용 transform op."""

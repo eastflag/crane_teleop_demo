@@ -44,7 +44,7 @@ class GantryCrane:
             pos=(C.RAIL_X[0], 0.0, 7.0), quat=(0.9239, 0.0, 0.3827, 0.0), scale=(8.6, 0.10, 0.10))
         box(stage, f"{self.root}/Portal/Brace2", size=1.0, mat=self._mats["yellow"],
             pos=(C.RAIL_X[0], 0.0, 7.0), quat=(0.9239, 0.0, -0.3827, 0.0), scale=(8.6, 0.10, 0.10))
-        # 조종실(cockpit.py)은 Portal 아래에 추가된다.
+        # 조종실(cockpit.py)은 월드에 고정되어 별도 경로에 추가된다(포탈과 무관).
 
         # ── 트롤리 (포탈 기준 X 이동) ──
         self.trolley_op = group(stage, f"{self.root}/Portal/Trolley")

@@ -1,0 +1,829 @@
+#usda 1.0
+(
+    defaultPrim = "Cabin"
+)
+
+def Xform "Cabin"
+{
+    matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+    uniform token[] xformOpOrder = ["xformOp:transform"]
+
+    def "Looks"
+    {
+        def Material "Shell"
+        {
+            token outputs:surface.connect = </Cabin/Looks/Shell/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.62, 0.64, 0.68)
+                float inputs:metallic = 0.2
+                float inputs:roughness = 0.7
+                token outputs:surface
+            }
+        }
+
+        def Material "Glass"
+        {
+            token outputs:surface.connect = </Cabin/Looks/Glass/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65, 0.75, 0.85)
+                float inputs:metallic = 0
+                float inputs:opacity = 0.25
+                float inputs:roughness = 0.1
+                token outputs:surface
+            }
+        }
+
+        def Material "Seat"
+        {
+            token outputs:surface.connect = </Cabin/Looks/Seat/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.14, 0.14, 0.16)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "Orange"
+        {
+            token outputs:surface.connect = </Cabin/Looks/Orange/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.9, 0.42, 0.06)
+                float inputs:metallic = 0.2
+                float inputs:roughness = 0.45
+                token outputs:surface
+            }
+        }
+    }
+
+    def Xform "Robot" (
+        prepend references = @/home/ubuntu/IsaacLab/crane_teleop_demo/raise_a3_ultra_t3d0/raise_a3_ultra_t3d0.usda@
+    )
+    {
+        quatd xformOp:orient = (0.7071067811865476, 0, 0, 0.7071067811865476)
+        double3 xformOp:translate = (0, 0.3, -0.0924816497663743)
+
+        over "pelvis_link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+
+            over "left_hip_pitch_joint"
+            {
+                float drive:angular:physics:targetPosition = -90
+            }
+
+            over "right_hip_pitch_joint"
+            {
+                float drive:angular:physics:targetPosition = -90
+            }
+        }
+
+        over "imu_in_pelvis_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0.004370000213384628, 0, -0.21164999902248383)
+        }
+
+        over "left_hip_pitch_Link"
+        {
+            quatd xformOp:orient = (0.7010573597260819, -0.09229614495684542, -0.701057359726082, 0.09229614495684542)
+            double3 xformOp:translate = (0, 0.12297999858856198, -0.17874999344348907)
+        }
+
+        over "left_hip_roll_Link"
+        {
+            quatd xformOp:orient = (0.7071067811865476, 0, -0.6830126030495465, 0.18301307077769757)
+            double3 xformOp:translate = (0.04223300709934813, 0.13391041426567354, -0.1816787958243139)
+        }
+
+        over "left_hip_yaw_Link"
+        {
+            quatd xformOp:orient = (0.7071067811865476, 0, -0.6830126030495465, 0.18301307077769757)
+            double3 xformOp:translate = (0.04223300709934813, 0.13391041426567354, -0.1816787958243139)
+
+            over "left_knee_joint"
+            {
+                float drive:angular:physics:targetPosition = 60
+            }
+        }
+
+        over "left_knee_Link"
+        {
+            quatd xformOp:orient = (0.9538787372205678, -0.0915065353888488, -0.23795287475257038, 0.15849396851808564)
+            double3 xformOp:translate = (0.39962550131846186, 0.22641058479180634, -0.20646419536140007)
+
+            over "left_ankle_pitch_joint"
+            {
+                float drive:angular:physics:targetPosition = 30
+            }
+        }
+
+        over "left_ankle_pitch_Link"
+        {
+            quatd xformOp:orient = (0.98296284325221, -0.12940978339268355, 0.01703715674778997, 0.12940978339268364)
+            double3 xformOp:translate = (0.6000550916313871, 0.1852657869874175, -0.5675183502336256)
+        }
+
+        over "left_ankle_roll_Link"
+        {
+            quatd xformOp:orient = (0.98296284325221, -0.12940978339268355, 0.01703715674778997, 0.12940978339268364)
+            double3 xformOp:translate = (0.6000550916313871, 0.1852657869874175, -0.5675183502336256)
+        }
+
+        over "left_knee_shell_Link"
+        {
+            quatd xformOp:orient = (0.9538787372205678, -0.0915065353888488, -0.23795287475257038, 0.15849396851808564)
+            double3 xformOp:translate = (0.39962550131846186, 0.22641058479180634, -0.20646419536140007)
+        }
+
+        over "right_hip_pitch_Link"
+        {
+            quatd xformOp:orient = (0.7010573597260819, 0.09229614495684542, -0.701057359726082, -0.09229614495684542)
+            double3 xformOp:translate = (0, -0.12297999858856198, -0.17874999344348907)
+        }
+
+        over "right_hip_roll_Link"
+        {
+            quatd xformOp:orient = (0.7071067811865476, 0, -0.6830126030495465, -0.18301307077769757)
+            double3 xformOp:translate = (0.04223300709934813, -0.13362571274375232, -0.1827413140737114)
+        }
+
+        over "right_hip_yaw_Link"
+        {
+            quatd xformOp:orient = (0.7071067811865476, 0, -0.6830126030495465, -0.18301307077769757)
+            double3 xformOp:translate = (0.04223300709934813, -0.13362571274375232, -0.1827413140737114)
+
+            over "right_knee_joint"
+            {
+                float drive:angular:physics:targetPosition = 60
+            }
+        }
+
+        over "right_knee_Link"
+        {
+            quatd xformOp:orient = (0.9538787372205678, 0.0915065353888488, -0.23795287475257038, -0.15849396851808564)
+            double3 xformOp:translate = (0.39962550131846186, -0.22612588326988517, -0.20752671361079755)
+
+            over "right_ankle_pitch_joint"
+            {
+                float drive:angular:physics:targetPosition = 30
+            }
+        }
+
+        over "right_ankle_pitch_Link"
+        {
+            quatd xformOp:orient = (0.98296284325221, 0.12940978339268355, 0.01703715674778997, -0.12940978339268364)
+            double3 xformOp:translate = (0.6000550916313871, -0.18498108546549627, -0.5685808684830231)
+        }
+
+        over "right_ankle_roll_Link"
+        {
+            quatd xformOp:orient = (0.98296284325221, 0.12940978339268355, 0.01703715674778997, -0.12940978339268364)
+            double3 xformOp:translate = (0.6000550916313871, -0.18498108546549627, -0.5685808684830231)
+        }
+
+        over "right_knee_shell_Link"
+        {
+            quatd xformOp:orient = (0.9538787372205678, 0.0915065353888488, -0.23795287475257038, -0.15849396851808564)
+            double3 xformOp:translate = (0.39962550131846186, -0.22612588326988517, -0.20752671361079755)
+        }
+
+        over "waist_yaw_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+        }
+
+        over "waist_roll_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0, 0, 0)
+        }
+
+        over "torso_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (-0.019999999552965164, 0, 0.004999999888241291)
+
+            over "left_shoulder_pitch_joint"
+            {
+                float drive:angular:physics:targetPosition = -45.836624
+            }
+
+            over "right_shoulder_pitch_joint"
+            {
+                float drive:angular:physics:targetPosition = -45.836624
+            }
+        }
+
+        over "head_yaw_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0.010300001129508018, 0, 0.29396000504493713)
+        }
+
+        over "head_pitch_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (0.010300001129508018, 0, 0.5130000114440918)
+        }
+
+        over "imu_in_torso_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (-0.019999999552965164, 0, 0.11685000360012054)
+        }
+
+        over "left_shoulder_pitch_Link"
+        {
+            quatd xformOp:orient = (0.9201843585734886, 0.04017587472949563, -0.3890477067937961, -0.016986087392504633)
+            double3 xformOp:translate = (0.010300001129508046, 0.14822000265121466, 0.2888199985027313)
+        }
+
+        over "left_shoulder_roll_Link"
+        {
+            quatd xformOp:orient = (0.9201843585734886, 0.04017587472949563, -0.3890477067937961, -0.016986087392504633)
+            double3 xformOp:translate = (0.010300004837578342, 0.20699548707649748, 0.2939621523739303)
+        }
+
+        over "left_shoulder_yaw_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, -1.883396959888385e-18, -0.38793650576651306, -0.03393984119122547)
+            double3 xformOp:translate = (0.11633240659419732, 0.21308826857130467, 0.1911216187828635)
+        }
+
+        over "left_elbow_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, -1.883396959888385e-18, -0.38793650576651306, -0.03393984119122547)
+            double3 xformOp:translate = (0.21798746207753406, 0.2089739320958813, 0.1056489914092491)
+        }
+
+        over "left_wrist_roll_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, -1.883396959888385e-18, -0.38793650576651306, -0.03393984119122547)
+            double3 xformOp:translate = (0.3150088863617402, 0.20064535118175164, 0.19084568273149904)
+        }
+
+        over "left_wrist_pitch_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, -1.883396959888385e-18, -0.38793650576651306, -0.03393984119122547)
+            double3 xformOp:translate = (0.35681129058364836, 0.19689407136902237, 0.2337232664686583)
+        }
+
+        over "left_wrist_yaw_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, -1.883396959888385e-18, -0.38793650576651306, -0.03393984119122547)
+            double3 xformOp:translate = (0.38885979148960415, 0.1940180909866849, 0.2665960714382194)
+        }
+
+        over "right_shoulder_pitch_Link"
+        {
+            quatd xformOp:orient = (0.9201843585734886, -0.04017587472949563, -0.3890477067937961, 0.016986087392504633)
+            double3 xformOp:translate = (0.010300001129508046, -0.14822000265121466, 0.2888199985027313)
+        }
+
+        over "right_shoulder_roll_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.010300004837578342, -0.20699548707649748, 0.2939621523739303)
+        }
+
+        over "right_shoulder_yaw_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.11633260293012768, -0.21308833584239942, 0.19112143325558953)
+        }
+
+        over "right_elbow_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.21834497764557292, -0.2089608326406992, 0.1052992946981545)
+        }
+
+        over "right_wrist_roll_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.31536640192977905, -0.20063225172656954, 0.19049598602040443)
+        }
+
+        over "right_wrist_pitch_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.3571688061516872, -0.19688097191384027, 0.23337356975756368)
+        }
+
+        over "right_wrist_yaw_Link"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.389217307057643, -0.1940049915315028, 0.26624637472712476)
+        }
+
+        over "torso_shell_Link"
+        {
+            quatd xformOp:orient = (1, 0, 0, 0)
+            double3 xformOp:translate = (-0.019999999552965164, 0, 0.004999999888241291)
+        }
+
+        over "R_index_abad_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.4688675332050223, -0.18652423236891383, 0.3872361029607071)
+        }
+
+        over "R_index_dip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5062186937728279, -0.1835753144429369, 0.42553276556223674)
+        }
+
+        over "R_index_pip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.48104806724918203, -0.1844027755108464, 0.3997686655352951)
+        }
+
+        over "R_index_tip"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5330610896193262, -0.1824808443560633, 0.45301604080641145)
+        }
+
+        over "R_middle_abad_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.48400079806766616, -0.18839287749585698, 0.3754444684463284)
+        }
+
+        over "R_middle_dip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5213519602326598, -0.18544397441218702, 0.4137411307892461)
+        }
+
+        over "R_middle_pip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.49618133277737353, -0.18627142061326504, 0.38797703036991216)
+        }
+
+        over "R_middle_tip"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.548194376842636, -0.18434950246203266, 0.44122442733094613)
+        }
+
+        over "R_palm"
+        {
+            quatd xformOp:orient = (0.921060994002885, 1.883396959888385e-18, -0.38793650576651306, 0.03393984119122547)
+            double3 xformOp:translate = (0.42230366717204393, -0.1910215845347413, 0.30089663863759397)
+        }
+
+        over "R_pinky_abad_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5061234229878997, -0.1853356466556132, 0.34381378189022693)
+        }
+
+        over "R_pinky_dip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5434745848868008, -0.18238672868058722, 0.38211044318974796)
+        }
+
+        over "R_pinky_pip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5183039583631549, -0.18321418974849674, 0.35634634316280644)
+        }
+
+        over "R_pinky_tip"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.570316980733299, -0.1812922585937136, 0.40959371843392267)
+        }
+
+        over "R_ring_abad_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.49612283279048663, -0.18701989244678552, 0.3607076097090943)
+        }
+
+        over "R_ring_dip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.53347399402384, -0.18407097449628407, 0.3990042716596197)
+        }
+
+        over "R_ring_pip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5083033675001941, -0.18489843556419358, 0.3732401716326781)
+        }
+
+        over "R_ring_tip"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.5603163898703383, -0.18297650440941046, 0.4264875469037943)
+        }
+
+        over "R_thumb_abad_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.4379066351659354, -0.1686596021025235, 0.3503381687530355)
+        }
+
+        over "R_thumb_dip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.3662308255997184, -0.1717359953827166, 0.4039576047903799)
+        }
+
+        over "R_thumb_mcp_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.41492807067184, -0.1697200565645412, 0.36471704331699506)
+        }
+
+        over "R_thumb_pip_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.3908915371936625, -0.17050773046797219, 0.3919428270069125)
+        }
+
+        over "R_thumb_roll_link"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.4417037677856418, -0.1885803215151401, 0.34732957112876117)
+        }
+
+        over "R_thumb_tip"
+        {
+            quatd xformOp:orient = (0.6375288053559703, 0.2495923284815271, 0.2835321857622882, 0.671468682472547)
+            double3 xformOp:translate = (0.3401430562718929, -0.17320359446714942, 0.4102927713397825)
+        }
+
+        over "L_index_abad_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.4688675332050223, 0.18652423236891383, 0.3872361029607071)
+        }
+
+        over "L_index_dip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5062186937728279, 0.1835753144429369, 0.42553276556223674)
+        }
+
+        over "L_index_pip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.48104806724918203, 0.1844027755108464, 0.3997686655352951)
+        }
+
+        over "L_index_tip"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5330610896193262, 0.1824808443560633, 0.45301604080641145)
+        }
+
+        over "L_middle_abad_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.48400079806766616, 0.18839287749585698, 0.3754444684463284)
+        }
+
+        over "L_middle_dip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5213519602326598, 0.18544397441218702, 0.4137411307892461)
+        }
+
+        over "L_middle_pip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.49618133277737353, 0.18627142061326504, 0.38797703036991216)
+        }
+
+        over "L_middle_tip"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.548194376842636, 0.18434950246203266, 0.44122442733094613)
+        }
+
+        over "L_palm"
+        {
+            quatd xformOp:orient = (0.921060994002885, -1.883396959888385e-18, -0.38793650576651306, -0.03393984119122547)
+            double3 xformOp:translate = (0.42230366717204393, 0.1910215845347413, 0.30089663863759397)
+        }
+
+        over "L_pinky_abad_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5061234229878997, 0.1853356466556132, 0.34381378189022693)
+        }
+
+        over "L_pinky_dip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5434745848868008, 0.18238672868058722, 0.38211044318974796)
+        }
+
+        over "L_pinky_pip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5183039583631549, 0.18321418974849674, 0.35634634316280644)
+        }
+
+        over "L_pinky_tip"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.570316980733299, 0.1812922585937136, 0.40959371843392267)
+        }
+
+        over "L_ring_abad_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.49612283279048663, 0.18701989244678552, 0.3607076097090943)
+        }
+
+        over "L_ring_dip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.53347399402384, 0.18407097449628407, 0.3990042716596197)
+        }
+
+        over "L_ring_pip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5083033675001941, 0.18489843556419358, 0.3732401716326781)
+        }
+
+        over "L_ring_tip"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.5603163898703383, 0.18297650440941046, 0.4264875469037943)
+        }
+
+        over "L_thumb_abad_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.4379066351659354, 0.1686596021025235, 0.3503381687530355)
+        }
+
+        over "L_thumb_dip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.3662308255997184, 0.1717359953827166, 0.4039576047903799)
+        }
+
+        over "L_thumb_mcp_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.41492807067184, 0.1697200565645412, 0.36471704331699506)
+        }
+
+        over "L_thumb_pip_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.3908915371936625, 0.17050773046797219, 0.3919428270069125)
+        }
+
+        over "L_thumb_roll_link"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.4417037677856418, 0.1885803215151401, 0.34732957112876117)
+        }
+
+        over "L_thumb_tip"
+        {
+            quatd xformOp:orient = (-0.6375288053559708, 0.249592328481527, -0.2835321857622881, 0.6714686824725467)
+            double3 xformOp:translate = (0.3401430562718929, 0.17320359446714942, 0.4102927713397825)
+        }
+    }
+
+    def Cube "Floor" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Cabin/Looks/Shell>
+        double size = 1
+        matrix4d xformOp:transform = ( (2.4, 0, 0, 0), (0, 2, 0, 0), (0, 0, 0.08, 0), (0, 0, -1.26, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "Roof"
+    {
+        rel material:binding = </Cabin/Looks/Glass>
+        double size = 1
+        matrix4d xformOp:transform = ( (2.4, 0, 0, 0), (0, 2, 0, 0), (0, 0, 0.08, 0), (0, 0, 1.26, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BackWall"
+    {
+        rel material:binding = </Cabin/Looks/Shell>
+        double size = 1
+        matrix4d xformOp:transform = ( (2.4, 0, 0, 0), (0, 0.08, 0, 0), (0, 0, 2.6, 0), (0, -0.96, 0, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "SideL"
+    {
+        rel material:binding = </Cabin/Looks/Glass>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.08, 0, 0, 0), (0, 2, 0, 0), (0, 0, 2.6, 0), (-1.16, 0, 0, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "SideR"
+    {
+        rel material:binding = </Cabin/Looks/Glass>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.08, 0, 0, 0), (0, 2, 0, 0), (0, 0, 2.6, 0), (1.16, 0, 0, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "FrontSkirt"
+    {
+        rel material:binding = </Cabin/Looks/Shell>
+        double size = 1
+        matrix4d xformOp:transform = ( (2.4, 0, 0, 0), (0, 0.08, 0, 0), (0, 0, 0.5, 0), (0, 0.96, -1.05, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "FrontGlass"
+    {
+        rel material:binding = </Cabin/Looks/Glass>
+        double size = 1
+        matrix4d xformOp:transform = ( (2.3, 0, 0, 0), (0, 0.03913398812475765, -0.008278343641775644, 0), (0, 0.4292832058169287, 2.0293387911345753, 0), (0, 0.7, 0.35, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "SeatPan" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.46, 0, 0, 0), (0, 0.43962550131846184, 0, 0), (0, 0, 0.06, 0), (0, -0.010187249340769061, -0.8224816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "SeatPost"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.08, 0, 0, 0), (0, 0.08, 0, 0), (0, 0, 0.4275183502336257, 0), (0, -0.05, -1.0062408248831871, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BackRest" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.44, 0, 0, 0), (0, 0.06949660450977065, 0.008379854510224364, 0), (0, -0.0885870333938004, 0.734678390531861, 0), (0, -0.31, -0.43248164976637427, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BasePlate"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 0.5, 0, 0), (0, 0, 0.03, 0), (0, -0.05, -1.205, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ArmRestL"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.2, 0, 0, 0), (0, 0.69, 0, 0), (0, 0, 0.05, 0), (-0.36, 0.09499999999999999, -0.5674816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ArmPostL"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.05, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.25, 0), (-0.36, -0.19, -0.6674816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ArmRestR"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.2, 0, 0, 0), (0, 0.69, 0, 0), (0, 0, 0.05, 0), (0.36, 0.09499999999999999, -0.5674816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ArmPostR"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.05, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.25, 0), (0.36, -0.19, -0.6674816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "StickBaseL"
+    {
+        uniform token axis = "Z"
+        double height = 0.035
+        rel material:binding = </Cabin/Looks/Orange>
+        double radius = 0.045
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.36, 0.3, -0.5244816497663742, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "StickBaseR"
+    {
+        uniform token axis = "Z"
+        double height = 0.035
+        rel material:binding = </Cabin/Looks/Orange>
+        double radius = 0.045
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.36, 0.3, -0.5244816497663742, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "StickShaftL"
+    {
+        double height = 0.07599999999999998
+        rel material:binding = </Cabin/Looks/Orange>
+        double radius = 0.012
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.36, 0.3, -0.49248164976637426, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "StickShaftR"
+    {
+        double height = 0.07599999999999998
+        rel material:binding = </Cabin/Looks/Orange>
+        double radius = 0.012
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.36, 0.3, -0.49248164976637426, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Sphere "KnobL"
+    {
+        rel material:binding = </Cabin/Looks/Orange>
+        double radius = 0.03
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.36, 0.3, -0.4424816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Sphere "KnobR"
+    {
+        rel material:binding = </Cabin/Looks/Orange>
+        double radius = 0.03
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.36, 0.3, -0.4424816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "PedalBaseL"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.02, 0), (-0.13, 0.4496255013184619, -1.21, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "PedalBaseR"
+    {
+        rel material:binding = </Cabin/Looks/Seat>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.02, 0), (0.13, 0.4496255013184619, -1.21, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "PedalPlateL"
+    {
+        rel material:binding = </Cabin/Looks/Orange>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (-0.13, 0.6096255013184619, -1.1900000000000002, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "PedalPlateR"
+    {
+        rel material:binding = </Cabin/Looks/Orange>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (0.13, 0.6096255013184619, -1.1900000000000002, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+}
+
