@@ -1,6 +1,8 @@
 #usda 1.0
 (
     defaultPrim = "Cabin"
+    metersPerUnit = 1
+    upAxis = "Z"
 )
 
 def Xform "Cabin"

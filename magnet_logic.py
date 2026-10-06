@@ -47,7 +47,11 @@ class MagnetController:
             if dxy < C.MAGNET_FIELD_XY and C.MAGNET_FIELD_DZ[0] < d[2] < C.MAGNET_FIELD_DZ[1]:
                 candidates.append((dxy, i))
         for _, i in sorted(candidates)[: C.MAGNET_MAX_ATTACH - len(self.welded)]:
-            self.welded[i] = (pos[i] - magnet, quat[i].copy())
+            off = pos[i] - magnet
+            # 흡착 스냅: 캡처 순간의 공중 거리 그대로 두면 철근이 자석에서 몇 cm
+            # 떨어진 채 운반된다. 수평 오프셋만 유지하고 높이는 자석 하부에 밀착.
+            xy = np.clip(off[:2], -0.18, 0.18)
+            self.welded[i] = (np.array([xy[0], xy[1], -C.MAGNET_SNAP_DZ]), quat[i].copy())
 
     # ───────────────────────── 운반(용접 유지) ─────────────────────────
     def _carry(self, magnet, magnet_vel):

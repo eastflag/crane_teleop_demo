@@ -121,15 +121,15 @@ class ScriptedSource:
         self._hold = 0.0
         # (단계명, 목표 (x, y, hook_z), 정착 유지시간, 패들)
         self.phases = [
-            ("goto_pile", (*C.PILE_A_XY, 4.5), 0.5, 0),
-            ("descend",   (*C.PILE_A_XY, 0.58), 1.0, 0),
-            ("settle",    (*C.PILE_A_XY, 0.58), 1.4, 0),   # 이 구간에서 자석 부착
-            ("lift",      (*C.PILE_A_XY, 4.5), 0.6, 0),
-            ("goto_drop", (*C.DROP_XY, 3.5), 0.8, 0),
-            ("lower",     (*C.DROP_XY, 1.0), 0.8, 0),
-            ("release",   (*C.DROP_XY, 1.0), 1.3, 1),       # 패들 → 자석 해제
-            ("lift2",     (*C.DROP_XY, 4.0), 0.6, 0),
-            ("home",      (*C.CRANE_START[:2], 4.5), 0.8, 0),
+            ("goto_truck", (*C.TRUCK_XY, 4.5), 0.5, 0),
+            ("descend",    (*C.TRUCK_XY, 1.18), 1.0, 0),   # 자석 하단이 적재대 분철에 닿는 높이
+            ("settle",     (*C.TRUCK_XY, 1.18), 1.4, 0),   # 이 구간에서 분철 부착
+            ("lift",       (*C.TRUCK_XY, 4.5), 0.6, 0),
+            ("goto_jar",   (*C.JAR_XY, 3.5), 0.8, 0),
+            ("lower",      (*C.JAR_XY, 2.5), 0.8, 0),      # 2m 통 개구부 위(자석이 입구 밖)
+            ("release",    (*C.JAR_XY, 2.5), 1.3, 1),      # 패들 → 자석 해제, 투입
+            ("lift2",      (*C.JAR_XY, 4.0), 0.6, 0),
+            ("home",       (*C.CRANE_START[:2], 4.5), 0.8, 0),
         ]
 
     def poll(self, dt, state=None):

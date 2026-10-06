@@ -27,7 +27,7 @@ from isaaclab.app import AppLauncher  # noqa: E402
 app_launcher = AppLauncher(headless=True)
 simulation_app = app_launcher.app
 
-from pxr import Usd  # noqa: E402
+from pxr import Usd, UsdGeom  # noqa: E402
 
 from cockpit import CockpitRig  # noqa: E402
 
@@ -35,6 +35,8 @@ from cockpit import CockpitRig  # noqa: E402
 stage = Usd.Stage.CreateInMemory()
 rig = CockpitRig(stage, parent_path="", usd_asset=None, root_pos=(0.0, 0.0, 0.0))
 stage.SetDefaultPrim(stage.GetPrimAtPath(rig.root))
+UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.z)    # USD 기본은 Y-up - 데모/Isaac Sim 기준 Z-up 명시
+UsdGeom.SetStageMetersPerUnit(stage, 1.0)
 
 # ── 착석 포즈 검증(로봇 국부 좌표: +X=정면, 골반=원점) ──
 from cockpit import _prim_local_mat  # noqa: E402
