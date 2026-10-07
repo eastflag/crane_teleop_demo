@@ -47,7 +47,7 @@ import isaaclab.sim as sim_utils  # noqa: E402
 from isaaclab.actuators import ImplicitActuatorCfg  # noqa: E402
 from isaaclab.assets import ArticulationCfg, AssetBaseCfg  # noqa: E402
 from isaaclab.scene import InteractiveScene, InteractiveSceneCfg  # noqa: E402
-from isaaclab.sim import SimulationContext, SimulationCfg  # noqa: E402
+from isaaclab.sim import SimulationContext, RenderCfg, SimulationCfg  # noqa: E402
 from isaaclab.utils import configclass  # noqa: E402
 
 from cockpit import CockpitRig  # noqa: E402
@@ -59,7 +59,10 @@ import yard  # noqa: E402
 device = args_cli.device if args_cli.device else C.DEVICE_DEFAULT
 
 # ── 시뮬레이션 컨텍스트 ──
-sim = SimulationContext(SimulationCfg(dt=C.SIM_DT, device=device))
+sim = SimulationContext(SimulationCfg(
+    dt=C.SIM_DT, device=device,
+    render=RenderCfg(enable_translucency=True),   # /rtx/translucency/enabled 켜기
+))
 stage = omni.usd.get_context().get_stage()
 
 # ── 씬 애셋 reference(InteractiveScene 구성 전에 스테이지에 올린다) ──
