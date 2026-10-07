@@ -781,10 +781,10 @@ def Xform "Cabin"
 
             def Capsule "Shaft"
             {
-                double height = 0.07600000000000001
+                double height = 0.15200000000000002
                 rel material:binding = </Cabin/Looks/Orange>
                 double radius = 0.012
-                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.05, 1) )
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.1, 1) )
                 uniform token[] xformOpOrder = ["xformOp:transform"]
             }
 
@@ -792,7 +792,7 @@ def Xform "Cabin"
             {
                 rel material:binding = </Cabin/Looks/Orange>
                 double radius = 0.03
-                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.1, 1) )
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.2, 1) )
                 uniform token[] xformOpOrder = ["xformOp:transform"]
             }
 
@@ -888,10 +888,10 @@ def Xform "Cabin"
 
             def Capsule "Shaft"
             {
-                double height = 0.07600000000000001
+                double height = 0.15200000000000002
                 rel material:binding = </Cabin/Looks/Orange>
                 double radius = 0.012
-                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.05, 1) )
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.1, 1) )
                 uniform token[] xformOpOrder = ["xformOp:transform"]
             }
 
@@ -899,7 +899,7 @@ def Xform "Cabin"
             {
                 rel material:binding = </Cabin/Looks/Orange>
                 double radius = 0.03
-                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.1, 1) )
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.2, 1) )
                 uniform token[] xformOpOrder = ["xformOp:transform"]
             }
 
