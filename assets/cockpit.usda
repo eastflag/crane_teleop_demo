@@ -670,7 +670,7 @@ def Xform "Cabin"
     {
         rel material:binding = </Cabin/Looks/Glass>
         double size = 1
-        matrix4d xformOp:transform = ( (2.3, 0, 0, 0), (0, 0.03913398812475765, -0.008278343641775644, 0), (0, 0.4292832058169287, 2.0293387911345753, 0), (0, 0.7, 0.35, 1) )
+        matrix4d xformOp:transform = ( (2.3, 0, 0, 0), (0, 0.04, 0, 0), (0, 0, 2.02, 0), (0, 0.96, 0.21, 1) )
         uniform token[] xformOpOrder = ["xformOp:transform"]
     }
 
@@ -821,8 +821,8 @@ def Xform "Cabin"
             rel physics:body1 = </Cabin/StickL/TiltX>
             point3f physics:localPos0 = (0, 0, 0)
             point3f physics:localPos1 = (0, 0, 0)
-            float physics:lowerLimit = -0.6
-            float physics:upperLimit = 0.6
+            float physics:lowerLimit = -20
+            float physics:upperLimit = 20
         }
 
         def PhysicsRevoluteJoint "TiltYJoint" (
@@ -839,8 +839,13 @@ def Xform "Cabin"
             rel physics:body1 = </Cabin/StickL/TiltY>
             point3f physics:localPos0 = (0, 0, 0)
             point3f physics:localPos1 = (0, 0, 0)
-            float physics:lowerLimit = -0.6
-            float physics:upperLimit = 0.6
+            float physics:lowerLimit = -20
+            float physics:upperLimit = 20
+        }
+
+        def PhysicsFixedJoint "AnchorJoint"
+        {
+            rel physics:body1 = </Cabin/StickL/Base>
         }
     }
 
@@ -923,8 +928,8 @@ def Xform "Cabin"
             rel physics:body1 = </Cabin/StickR/TiltX>
             point3f physics:localPos0 = (0, 0, 0)
             point3f physics:localPos1 = (0, 0, 0)
-            float physics:lowerLimit = -0.6
-            float physics:upperLimit = 0.6
+            float physics:lowerLimit = -20
+            float physics:upperLimit = 20
         }
 
         def PhysicsRevoluteJoint "TiltYJoint" (
@@ -941,8 +946,13 @@ def Xform "Cabin"
             rel physics:body1 = </Cabin/StickR/TiltY>
             point3f physics:localPos0 = (0, 0, 0)
             point3f physics:localPos1 = (0, 0, 0)
-            float physics:lowerLimit = -0.6
-            float physics:upperLimit = 0.6
+            float physics:lowerLimit = -20
+            float physics:upperLimit = 20
+        }
+
+        def PhysicsFixedJoint "AnchorJoint"
+        {
+            rel physics:body1 = </Cabin/StickR/Base>
         }
     }
 
