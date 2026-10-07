@@ -973,7 +973,7 @@ def Xform "Cabin"
             rel material:binding = </Cabin/Looks/Orange>
             float physics:mass = 0.2
             double size = 1
-            matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (-0.13, 0.6096255013184619, -1.1900000000000002, 1) )
+            matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2833333333333334, 0.09860132971832677, 0), (0, -0.0032867109906108928, 0.009444444444444446, 0), (-0.13, 0.6025801512456661, -1.165907179404531, 1) )
             uniform token[] xformOpOrder = ["xformOp:transform"]
         }
 
@@ -984,7 +984,7 @@ def Xform "Cabin"
             float drive:angular:physics:damping = 0.5
             float drive:angular:physics:maxForce = 20
             float drive:angular:physics:stiffness = 6
-            float drive:angular:physics:targetPosition = 9.594069
+            float drive:angular:physics:targetPosition = 19.188137
             float drive:angular:physics:targetVelocity = 0
             uniform token physics:axis = "X"
             rel physics:body0 = </Cabin/Floor>
@@ -992,7 +992,7 @@ def Xform "Cabin"
             point3f physics:localPos0 = (-0.054166667, 0.23127842, 0.50087416)
             point3f physics:localPos1 = (0, -0.5, -0.5)
             float physics:lowerLimit = 0
-            float physics:upperLimit = 9.594069
+            float physics:upperLimit = 19.188137
         }
     }
 
@@ -1013,7 +1013,7 @@ def Xform "Cabin"
             rel material:binding = </Cabin/Looks/Orange>
             float physics:mass = 0.2
             double size = 1
-            matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (0.13, 0.6096255013184619, -1.1900000000000002, 1) )
+            matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2833333333333334, 0.09860132971832677, 0), (0, -0.0032867109906108928, 0.009444444444444446, 0), (0.13, 0.6025801512456661, -1.165907179404531, 1) )
             uniform token[] xformOpOrder = ["xformOp:transform"]
         }
 
@@ -1024,7 +1024,7 @@ def Xform "Cabin"
             float drive:angular:physics:damping = 0.5
             float drive:angular:physics:maxForce = 20
             float drive:angular:physics:stiffness = 6
-            float drive:angular:physics:targetPosition = 9.594069
+            float drive:angular:physics:targetPosition = 19.188137
             float drive:angular:physics:targetVelocity = 0
             uniform token physics:axis = "X"
             rel physics:body0 = </Cabin/Floor>
@@ -1032,7 +1032,7 @@ def Xform "Cabin"
             point3f physics:localPos0 = (0.054166667, 0.23127842, 0.50087416)
             point3f physics:localPos1 = (0, -0.5, -0.5)
             float physics:lowerLimit = 0
-            float physics:upperLimit = 9.594069
+            float physics:upperLimit = 19.188137
         }
     }
 }

@@ -37,9 +37,9 @@ FLOOR_TOP = FLOOR_Z + FLOOR_T             # 바닥 윗면(-1.22): 페달은 이�
 
 # 페달: 발 하나 크기(가로 15cm × 세로 30cm × 두께 1cm).
 # 안식 상태 = 뒤엣지(A, 로봇 쪽)는 바닥에 붙고 앞엣지(B, 먼 쪽)가 PEDAL_LIFT 만큼
-# 부상(30cm 판에서 약 9.6°). 밟으면 B가 내려와 A와 같은 높이(판이 수평)가 된다.
+# 부상(30cm 판에서 약 19.2°). 밟으면 B가 내려와 A와 같은 높이(판이 수평)가 된다.
 PEDAL_SIZE = (0.15, 0.30, 0.01)
-PEDAL_LIFT = 0.05
+PEDAL_LIFT = 0.0986
 PEDAL_TILT_REST = math.asin(PEDAL_LIFT / PEDAL_SIZE[1])
 
 
