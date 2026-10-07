@@ -6,7 +6,7 @@
   트럭에 실려 온 분철을 자석으로 흡착해 등급별 지정 구역(중량A/B·경량A/B)에
   하차하고 적치 판정을 출력한다.
 
-씬은 스크립트가 아니라 USD 애셋으로 구성한다(make_scene_assets.py 참고):
+씬은 USD 애셋으로 구성하고 데모는 reference로 로드만 한다:
   assets/yard.usd · truck_load.usd · rebar_set.usd · crane.usd(프리즘 3축
   아큘레이션) · cockpit.usd(조이스틱 2자유도 회전 아큘레이션 포함)
 
@@ -31,7 +31,6 @@ parser.add_argument("--input", choices=["auto", "gamepad", "scripted"], default=
                     help="입력 소스 (auto: 게임패드 시도 후 실패 시 scripted)")
 parser.add_argument("--num-rebar", type=int, default=C.REBAR_NUM,
                     help=f"개별 철근/분철 수(최대 {C.REBAR_MAX})")
-parser.add_argument("--seed", type=int, default=7, help="폴백 스폰 시드")
 parser.add_argument("--camera", default="external", choices=list(C.CAMERAS), help="초기 카메라")
 parser.add_argument("--max-steps", type=int, default=0, help="0이면 무한(스모크 테스트용)")
 args_cli = parser.parse_args()
@@ -43,7 +42,6 @@ except TypeError:  # 구형 시그니처 폴백
 simulation_app = app_launcher.app
 
 # ═══════════════════ 앱 실행 이후에만 isaaclab/pxr import ═══════════════════
-import numpy as np  # noqa: E402
 import omni.usd  # noqa: E402
 import isaaclab.sim as sim_utils  # noqa: E402
 from isaaclab.actuators import ImplicitActuatorCfg  # noqa: E402
@@ -65,61 +63,53 @@ sim = SimulationContext(SimulationCfg(dt=C.SIM_DT, device=device))
 stage = omni.usd.get_context().get_stage()
 
 # ── 씬 애셋 reference(InteractiveScene 구성 전에 스테이지에 올린다) ──
-mounts = yard.load_scene_assets(stage)          # yard / truck / rebar_set / crane
+yard.load_scene_assets(stage)                   # yard / truck / rebar_set / crane
 cockpit = CockpitRig(stage, parent_path="/World")   # 조종실(로봇·스틱 포함 애셋)
 
 # ── 시뮬레이션 객체 설정: 애셋 프림을 래핑(spawn=None) ──
-has_crane_art = mounts.get("crane") is not None
-has_stick_art = cockpit._stick_articulated
 entries = {
     "ground": AssetBaseCfg(prim_path="/World/ground", spawn=sim_utils.GroundPlaneCfg()),
     "dome": AssetBaseCfg(prim_path="/World/Dome",
                          spawn=sim_utils.DomeLightCfg(intensity=2000.0, color=(0.9, 0.92, 1.0))),
-    "rebar": yard.make_rebar_collection_cfg(args_cli.num_rebar, args_cli.seed),
+    "rebar": yard.make_rebar_collection_cfg(args_cli.num_rebar),
 }
-if has_crane_art:
-    # 크레인: 프리즘 3축 아큘레이션(crane.usd). 초기 관절위치 = CRANE_START.
-    # 액추에이터 게인은 crane.usd 의 드라이브(config.CRANE_DRIVE)와 동일하게.
-    tr, tt, th = C.CRANE_DRIVE["travel"], C.CRANE_DRIVE["trolley"], C.CRANE_DRIVE["hoist"]
-    entries["crane_art"] = ArticulationCfg(
-        prim_path="/World/Crane/CraneArticulation",
-        spawn=None,
-        init_state=ArticulationCfg.InitialStateCfg(
-            joint_pos={
-                JOINT_NAMES["y"]: C.CRANE_START[1],
-                JOINT_NAMES["x"]: C.CRANE_START[0],
-                JOINT_NAMES["z"]: C.CRANE_START[2] - HOOK_REST_Z,
-            },
-        ),
-        actuators={
-            "travel": ImplicitActuatorCfg(
-                joint_names_expr=[JOINT_NAMES["y"]], stiffness=tr[0], damping=tr[1],
-                effort_limit=tr[2], velocity_limit=10.0),
-            "trolley": ImplicitActuatorCfg(
-                joint_names_expr=[JOINT_NAMES["x"]], stiffness=tt[0], damping=tt[1],
-                effort_limit=tt[2], velocity_limit=10.0),
-            "hoist": ImplicitActuatorCfg(
-                joint_names_expr=[JOINT_NAMES["z"]], stiffness=th[0], damping=th[1],
-                effort_limit=th[2], velocity_limit=10.0),
+# 크레인: 프리즘 3축 아큘레이션(crane.usd). 초기 관절위치 = CRANE_START.
+# 액추에이터 게인은 crane.usd 의 드라이브(config.CRANE_DRIVE)와 동일하게.
+tr, tt, th = C.CRANE_DRIVE["travel"], C.CRANE_DRIVE["trolley"], C.CRANE_DRIVE["hoist"]
+entries["crane_art"] = ArticulationCfg(
+    prim_path="/World/Crane/CraneArticulation",
+    spawn=None,
+    init_state=ArticulationCfg.InitialStateCfg(
+        joint_pos={
+            JOINT_NAMES["y"]: C.CRANE_START[1],
+            JOINT_NAMES["x"]: C.CRANE_START[0],
+            JOINT_NAMES["z"]: C.CRANE_START[2] - HOOK_REST_Z,
         },
-    )
-if has_stick_art:
-    # 조이스틱 2자유도 회전 아큘레이션(cockpit.usd 안)
-    sk, sd, sf = C.STICK_DRIVE
-    stick_cfg = lambda path: ArticulationCfg(
-        prim_path=path, spawn=None,
-        actuators={"gimbal": ImplicitActuatorCfg(
-            joint_names_expr=[".*"], stiffness=sk, damping=sd, effort_limit=sf)},
-    )
-    entries["stick_l"] = stick_cfg("/World/Cabin/StickL")
-    entries["stick_r"] = stick_cfg("/World/Cabin/StickR")
+    ),
+    actuators={
+        "travel": ImplicitActuatorCfg(
+            joint_names_expr=[JOINT_NAMES["y"]], stiffness=tr[0], damping=tr[1],
+            effort_limit=tr[2], velocity_limit=10.0),
+        "trolley": ImplicitActuatorCfg(
+            joint_names_expr=[JOINT_NAMES["x"]], stiffness=tt[0], damping=tt[1],
+            effort_limit=tt[2], velocity_limit=10.0),
+        "hoist": ImplicitActuatorCfg(
+            joint_names_expr=[JOINT_NAMES["z"]], stiffness=th[0], damping=th[1],
+            effort_limit=th[2], velocity_limit=10.0),
+    },
+)
+# 조이스틱 2자유도 회전 아큘레이션(cockpit.usd 안)
+sk, sd, sf = C.STICK_DRIVE
+stick_cfg = lambda path: ArticulationCfg(
+    prim_path=path, spawn=None,
+    actuators={"gimbal": ImplicitActuatorCfg(
+        joint_names_expr=[".*"], stiffness=sk, damping=sd, effort_limit=sf)},
+)
+entries["stick_l"] = stick_cfg("/World/Cabin/StickL")
+entries["stick_r"] = stick_cfg("/World/Cabin/StickR")
 
 YardSceneCfg = configclass(type("YardSceneCfg", (InteractiveSceneCfg,), dict(entries)))
 scene = InteractiveScene(YardSceneCfg(num_envs=1, env_spacing=2.0))
-
-# ── 절차적 폴백(애셋이 없을 때만) ──
-if mounts.get("truck") is None:
-    yard.add_truck(stage)
 
 magnet = MagnetController(scene["rebar"], device)
 source, source_name = make_source(args_cli.input)
@@ -130,9 +120,8 @@ sim.set_camera_view(eye=list(cam["eye"]), target=list(cam["target"]))
 # 아큘레이션 핸들은 리셋 이후에 접근 가능(physx 뷰가 늦게 생김)
 sim.reset()
 scene.reset()
-crane = GantryCrane(stage, articulation=scene["crane_art"] if has_crane_art else None)
-if has_stick_art:
-    cockpit.set_stick_articulations(scene["stick_l"], scene["stick_r"])
+crane = GantryCrane(stage, articulation=scene["crane_art"])
+cockpit.set_stick_articulations(scene["stick_l"], scene["stick_r"])
 crane.update(1.0 / 120.0, Command())   # 초기 목표 전송 + 자석 위치 계산
 
 mag_on = False   # 자석은 끄고 시작(웹 페이지처럼 버튼으로 켠다) - settle에서 ON
@@ -186,7 +175,7 @@ while simulation_app.is_running():
 
 if args_cli.max_steps:
     # 스모크 테스트 모드: simulation_app.close()가 매달리는 경우가 있어(키트 종료
-    # 세그폴트/교착 - make_cockpit_asset.py와 같은 대응) 출력을 플러시하고 강제 종료.
+    # 세그폴트/교착) 출력을 플러시하고 강제 종료.
     import os as _os
     import sys as _sys
 

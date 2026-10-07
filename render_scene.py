@@ -8,7 +8,6 @@ demo.py 와 동일하게 애셋을 reference 로 올리고(물리 스텝 몇 회
   → /tmp/scene_external.png, /tmp/scene_yard.png, ... 생성
 """
 import argparse
-from pathlib import Path
 
 from isaaclab.app import AppLauncher
 

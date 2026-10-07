@@ -27,7 +27,7 @@ magnet_logic.py                  자석 ON: 하부 필드 안의 철근 자동 �
 yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 판정(정위치/오적치)
 ```
 
-## 씬 = USD 애셋 (make_scene_assets.py 생성)
+## 씬 = USD 애셋
 
 | 애셋 | 내용 |
 |---|---|
@@ -36,7 +36,7 @@ yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 �
 | `assets/rebar_set.usd` | 자석으로 집는 **개별 강체 30개**(직선 철근 15 + 굽은 분철 15). 더미 위 ~1cm에서 스폰해 시작 직후 자연 안착 - 수백 개 강체의 충돌 비용을 피한다(`REBAR_MAX=30`) |
 | `assets/crane.usd` | 갠트리 크레인 = **프리즘 3축 아큘레이션**(Base→Portal[주행 Y]→Trolley[횡행 X]→Hook[권상 Z]) + 위치 드라이브. 정적 고가 레일·기둥, 보도 난간, 자석 디스크, 시각용 와이어 |
 | `assets/cockpit.usd` | 조종실(부스·의자·페달) + 착석 A3 로봇 + **조이스틱 2자유도 회전 아큘레이션 2개**(짐벌 X+Y, 스프링 복원 드라이브) |
-| `assets/textures/*.png` | 구역 명판·AIMOS 현판(PIL + Noto Sans CJK 한글) |
+| `assets/textures/*.png` | 구역 명판·AIMOS 현판(한글) |
 
 아큘레이션 참고: PhysX 아큘레이션에서 world 직결 조인트는 무시되므로, 크레인·조이스틱
 모두 더미 베이스 링크를 두고 `베이스→첫 링크` 조인트로 첫 축을 구성한다.
@@ -48,14 +48,11 @@ yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 �
 | `demo.py` | 진입점. 애셋 reference 로드 → InteractiveScene 구성(spawn=None 래핑) → 메인 루프 |
 | `config.py` | 모든 튜닝 상수(속도, 작업범위, 자석 필드, 구역, 아큘레이션 게인, 카메라) |
 | `input_source.py` | 게임패드 소스 + 하드웨어 없는 자동 파일럿(scripted, 등급 구역 순환) |
-| `crane.py` | 크레인 아큘레이션 구동(위치 목표 쓰기 + 관절 상태에서 자석 위치 계산). 애셋이 없으면 절차적 운동학 폴백 |
-| `cockpit.py` | 조종실 + 조이스틱 아큘레이션 구동 + 착석 로봇(FK 베이크) |
+| `crane.py` | 크레인 아큘레이션 구동(위치 목표 쓰기 + 관절 상태에서 자석 위치 계산) |
+| `cockpit.py` | 조종실 애셋 로드 + 조이스틱 아큘레이션 구동 + 페달 갱신 |
 | `magnet_logic.py` | 자석 부착/운반/해제 |
 | `yard.py` | 씬 애셋 로드 + 철근 컬렉션(spawn=None) + 등급 구역 판정 |
-| `scene_build.py` | USD 애셋 빌더 라이브러리(재질·텍스처 평면·분철 형상·크레인 아큘레이션) |
-| `make_scene_assets.py` | 애셋 4종 + 명판 텍스처 생성·검증 (`assets/` 로 내보내기) |
-| `make_cockpit_asset.py` | 조종실 애셋 재생성(로봇은 `raise_a3_ultra_t3d0/` reference 유지) |
-| `usd_utils.py` | USD 프리미티브 생성/갱신 헬퍼 |
+| `usd_utils.py` | 로드한 프림의 transform 갱신 헬퍼(와이어·페달 등) |
 | `raise_a3_ultra_t3d0/` | AgiBot A3 Ultra 로봇 USD(구조 3.0, Mulan PSL v2) |
 | `drawing/cockpit1_flat.png` | 조종실 외관 컨셉 도면(주황색 = 조이스틱/페달) |
 
@@ -67,9 +64,6 @@ yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 �
 # 게임패드 지원(필요 시)
 ./isaaclab.sh -p -m pip install "isaaclab[gamepad]"
 
-# 0) 씬 애셋 생성(처음 1회 + scene_build.py 수정 시)
-./isaaclab.sh -p crane_teleop_demo/make_scene_assets.py
-
 # 1) 하드웨어 없이 전체 사이클 자동 검증 (먼저 이것으로 씬 확인)
 ./isaaclab.sh -p crane_teleop_demo/demo.py --input scripted
 
@@ -80,8 +74,8 @@ yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 �
 ./isaaclab.sh -p crane_teleop_demo/demo.py --input scripted --headless --max-steps 5200
 ```
 
-모든 씬 애셋이 갖춰져 있으면 demo.py 는 reference 로 로드한다. 애셋이 없으면
-절차적 생성 폴백으로 동작한다(등급 구역 판정은 그대로 동작).
+demo.py 는 `assets/` 의 USD 를 reference 로 로드만 한다. 애셋 파일이 없으면
+시작 시 오류로 종료되므로 USD 를 먼저 준비해 둔다.
 
 ## 조작 (게임패드)
 
@@ -106,7 +100,7 @@ yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 �
 
 - **크레인·조이스틱은 물리 아큘레이션, 철근만 자유 강체**: 조작 응답성은 위치
   제어 드라이브로 결정적으로 유지하면서(v2 로드맵 1·3번), 하중·적치의 재미는
-  자유 강체 물리로 얻는다. 아큘레이션이 없는 환경(애셋 빌더 등)은 운동학 폴백.
+  자유 강체 물리로 얻는다.
 - **물리 스틱의 측정값**: 스틱 관절 드라이브 목표 = 필터된 명령, 관절각 = 측정값.
   손-스틱 결합은 IK 커플링 대신 착석 포즈로 단순화(팔 IK는 다음 단계).
 - **자석 부착은 근접 판정 + 키네마틱 용접**: 실제 전자석도 일정 거리에서 달라붙으므로
@@ -125,9 +119,9 @@ yard.py 등급 판정                 내려놓은 곳이 지정 구역인지 �
 |---|---|---|
 | Gamepad import 실패 | `input_source.py` `GamepadSource.__init__` | 모듈 경로/생성자 확인 |
 | 게임패드 값이 0으로 고정 | `input_source.py` `AXIS_KEYS` | 첫 폴링에 출력되는 키 목록에 맞춰 후보 수정 |
-| 조인트 3개 미발견 | `crane.py` `find_joints` | crane.usd 재생성(world 직결 조인트 무시 확인) |
-| 씬이 텅 비었음 | `demo.py` 시작 로그 | `make_scene_assets.py` 재실행 |
-| 조이스틱 안 움직임 | `cockpit.py` `_attach` | cockpit.usd 재생성 후 `[cockpit] ... 조이스틱 아큘레이션` 로그 확인 |
+| 조인트 3개 미발견 | `crane.py` `find_joints` | crane.usd 확인(world 직결 조인트는 무시됨) |
+| 애셋 없음 오류로 종료 | `demo.py` 시작 로그 | `assets/` 에 USD 준비(yard·truck_load·rebar_set·crane·cockpit) |
+| 조이스틱 안 움직임 | `cockpit.py` `_attach` | `[cockpit] ... 조이스틱 아큘레이션` 로그 확인(아큘레이션 없는 애셋이면 오류 종료) |
 
 ## 다음 단계 로드맵
 

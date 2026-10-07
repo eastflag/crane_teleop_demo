@@ -1,26 +1,15 @@
-"""USD(pxr) 프리미티브 생성/갱신 헬퍼 - 물리 없는 시각 요소 전용.
+"""USD(pxr) 프림 갱신 헬퍼 - 애셋에서 로드한 프림의 런타임 핸들 묶기·변환 갱신.
 
-크레인 구조물·조종실·승강 로봇은 전부 여기 헬퍼로 만든 비물리 프림이다.
-(물리 시뮬레이션 대상은 철근뿐 - yard.py 참조)
+씬 구성물은 전부 USD 애셋으로 준비하고, 이 모듈은 reference로 로드한 프림의
+transform op 를 다시 묶어 오버라이드로 갱신하는 데만 쓴다(와이어·페달 등).
 """
 import math
 
 import numpy as np
-from pxr import Gf, Sdf, UsdGeom, UsdShade
+from pxr import Gf, UsdGeom
 
 
 # ═══════════════════════ 쿼터니언 유틸 (w, x, y, z 순서) ═══════════════════════
-def quat_mul(a, b):
-    aw, ax, ay, az = a
-    bw, bx, by, bz = b
-    return np.array([
-        aw * bw - ax * bx - ay * by - az * bz,
-        aw * bx + ax * bw + ay * bz - az * by,
-        aw * by - ax * bz + ay * bw + az * bx,
-        aw * bz + ax * by - ay * bx + az * bw,
-    ])
-
-
 def quat_axis_angle(axis, angle):
     axis = np.asarray(axis, dtype=float)
     n = np.linalg.norm(axis)
@@ -44,35 +33,11 @@ def quat_between(a, b):
         axis = np.cross(a, [1.0, 0.0, 0.0])
         if np.linalg.norm(axis) < 1e-6:
             axis = np.cross(a, [0.0, 1.0, 0.0])
-        return quat_axis_angle(axis, np.pi)
-    return quat_axis_angle(np.cross(a, b), np.arccos(d))
-
-
-# ═══════════════════════ 재질 ═══════════════════════
-def make_material(stage, path, color, roughness=0.6, metallic=0.0, opacity=1.0):
-    mat = UsdShade.Material.Define(stage, path)
-    shader = UsdShade.Shader.Define(stage, f"{path}/Shader")
-    shader.CreateIdAttr("UsdPreviewSurface")
-    shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(*[float(c) for c in color]))
-    shader.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(float(roughness))
-    shader.CreateInput("metallic", Sdf.ValueTypeNames.Float).Set(float(metallic))
-    if opacity < 1.0:
-        shader.CreateInput("opacity", Sdf.ValueTypeNames.Float).Set(float(opacity))
-    mat.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
-    return mat
-
-
-def _bind(prim, mat):
-    UsdShade.MaterialBindingAPI(prim).Bind(mat)
+        return quat_axis_angle(axis, math.pi)
+    return quat_axis_angle(np.cross(a, b), math.arccos(d))
 
 
 # ═══════════════════════ 변환(이동/회전/스케일) ═══════════════════════
-def _make_op(gprim, pos, quat, scale):
-    op = gprim.MakeMatrixXform() if hasattr(gprim, "MakeMatrixXform") else gprim.AddTransformOp()
-    set_xform(op, pos, quat, scale)
-    return op
-
-
 def _quat_to_rotation(quat):
     """쿼터니언(w, x, y, z) → Gf.Rotation(축-각도, 도 단위).
 
@@ -90,7 +55,7 @@ def _quat_to_rotation(quat):
 
 
 def set_xform(op, pos, quat=(1.0, 0.0, 0.0, 0.0), scale=(1.0, 1.0, 1.0)):
-    """생성 시 받아둔 transform op의 위치/자세/스케일을 갱신한다."""
+    """transform op의 위치/자세/스케일을 갱신한다."""
     # M = S * R (row-vector 관례: 스케일 먼저 적용) + 이동
     m = Gf.Matrix4d().SetScale(Gf.Vec3d(*[float(s) for s in scale])) * Gf.Matrix4d().SetRotate(_quat_to_rotation(quat))
     m.SetTranslateOnly(Gf.Vec3d(*[float(p) for p in pos]))
@@ -98,9 +63,9 @@ def set_xform(op, pos, quat=(1.0, 0.0, 0.0, 0.0), scale=(1.0, 1.0, 1.0)):
 
 
 # ═══════════════════ 애셋(.usd)에서 로드한 프림에 핸들 다시 묶기 ═══════════════════
-# 생성 헬퍼들은 만들면서 갱신용 op/attr을 돌려주지만, USD 애셋을 reference로
-# 로드한 프림은 같은 것을 프림에서 다시 꺼내야 한다. 층위는 로컬(참조하는 쪽)
-# 레이어가 참조보다 강하므로 op.Set()은 그대로 오버라이드로 기록된다.
+# 로드된 프림은 만들 때의 갱신용 op/attr을 돌려받을 수 없으므로 프림에서 다시
+# 꺼낸다. 층위는 로컬(참조하는 쪽) 레이어가 참조보다 강하므로 op.Set()은
+# 그대로 오버라이드로 기록된다.
 def get_op(prim, create=False):
     """프림의 (유일한) transform op. create=True면 없을 때 새로 만든다."""
     xf = UsdGeom.Xformable(prim)
@@ -127,57 +92,6 @@ def attach_capsule(stage, path):
         raise RuntimeError(f"애셋에서 프림을 찾을 수 없음: {path}")
     g = UsdGeom.Capsule(prim)
     return g, get_op(prim), g.GetHeightAttr(), float(g.GetRadiusAttr().Get())
-
-
-# ═══════════════════════ 프리미티브 ═══════════════════════
-def group(stage, path, pos=(0.0, 0.0, 0.0), quat=(1.0, 0.0, 0.0, 0.0)):
-    """빈 좌표계 그룹(계층 루트용). 반환값: 갱신용 transform op."""
-    xf = UsdGeom.Xform.Define(stage, path)
-    return _make_op(xf, pos, quat, (1.0, 1.0, 1.0))
-
-
-def box(stage, path, size=1.0, mat=None, pos=(0.0, 0.0, 0.0), quat=(1.0, 0.0, 0.0, 0.0), scale=(1.0, 1.0, 1.0)):
-    g = UsdGeom.Cube.Define(stage, path)
-    g.CreateSizeAttr(float(size))
-    op = _make_op(g, pos, quat, scale)
-    if mat:
-        _bind(g, mat)
-    return op
-
-
-def sphere(stage, path, radius, mat=None, pos=(0.0, 0.0, 0.0)):
-    g = UsdGeom.Sphere.Define(stage, path)
-    g.CreateRadiusAttr(float(radius))
-    op = _make_op(g, pos, (1.0, 0.0, 0.0, 0.0), (1.0, 1.0, 1.0))
-    if mat:
-        _bind(g, mat)
-    return op
-
-
-def cylinder(stage, path, radius, height, mat=None, pos=(0.0, 0.0, 0.0),
-             quat=(1.0, 0.0, 0.0, 0.0), axis="Z"):
-    g = UsdGeom.Cylinder.Define(stage, path)
-    g.CreateRadiusAttr(float(radius))
-    g.CreateHeightAttr(float(height))
-    try:
-        g.CreateAxisAttr(axis)      # 구형 USD에서만 필요, 실패 시 기본 Z축
-    except Exception:
-        pass
-    op = _make_op(g, pos, quat, (1.0, 1.0, 1.0))
-    if mat:
-        _bind(g, mat)
-    return op
-
-
-def capsule(stage, path, radius, height, mat=None, pos=(0.0, 0.0, 0.0), quat=(1.0, 0.0, 0.0, 0.0)):
-    """가변 길이 캡슐(뼈대·와이어용). 반환값: (프림, transform op, height attr, 반지름)."""
-    g = UsdGeom.Capsule.Define(stage, path)
-    g.CreateRadiusAttr(float(radius))
-    h_attr = g.CreateHeightAttr(float(height))
-    op = _make_op(g, pos, quat, (1.0, 1.0, 1.0))
-    if mat:
-        _bind(g, mat)
-    return g, op, h_attr, radius
 
 
 def place_segment(capsule_tuple, a, b):
