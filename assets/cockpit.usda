@@ -956,36 +956,84 @@ def Xform "Cabin"
         }
     }
 
-    def Cube "PedalBaseL"
+    def Xform "PedalL"
     {
-        rel material:binding = </Cabin/Looks/Seat>
-        double size = 1
-        matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.02, 0), (-0.13, 0.4496255013184619, -1.21, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
+        def Cube "PedalBaseL"
+        {
+            rel material:binding = </Cabin/Looks/Seat>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.02, 0), (-0.13, 0.4496255013184619, -1.21, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "PedalPlateL" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Cabin/Looks/Orange>
+            float physics:mass = 0.2
+            double size = 1
+            matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (-0.13, 0.6096255013184619, -1.1900000000000002, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def PhysicsRevoluteJoint "PedalPlateLJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 0.5
+            float drive:angular:physics:maxForce = 20
+            float drive:angular:physics:stiffness = 6
+            float drive:angular:physics:targetPosition = 9.594069
+            float drive:angular:physics:targetVelocity = 0
+            uniform token physics:axis = "X"
+            rel physics:body0 = </Cabin/Floor>
+            rel physics:body1 = </Cabin/PedalL/PedalPlateL>
+            point3f physics:localPos0 = (-0.054166667, 0.23127842, 0.50087416)
+            point3f physics:localPos1 = (0, -0.5, -0.5)
+            float physics:lowerLimit = 0
+            float physics:upperLimit = 9.594069
+        }
     }
 
-    def Cube "PedalBaseR"
+    def Xform "PedalR"
     {
-        rel material:binding = </Cabin/Looks/Seat>
-        double size = 1
-        matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.02, 0), (0.13, 0.4496255013184619, -1.21, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
-    }
+        def Cube "PedalBaseR"
+        {
+            rel material:binding = </Cabin/Looks/Seat>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.02, 0), (0.13, 0.4496255013184619, -1.21, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
 
-    def Cube "PedalPlateL"
-    {
-        rel material:binding = </Cabin/Looks/Orange>
-        double size = 1
-        matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (-0.13, 0.6096255013184619, -1.1900000000000002, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
-    }
+        def Cube "PedalPlateR" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Cabin/Looks/Orange>
+            float physics:mass = 0.2
+            double size = 1
+            matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (0.13, 0.6096255013184619, -1.1900000000000002, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
 
-    def Cube "PedalPlateR"
-    {
-        rel material:binding = </Cabin/Looks/Orange>
-        double size = 1
-        matrix4d xformOp:transform = ( (0.15, 0, 0, 0), (0, 0.2958039891549808, 0.04999999999999992, 0), (0, -0.0016666666666666642, 0.009860132971832693, 0), (0.13, 0.6096255013184619, -1.1900000000000002, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
+        def PhysicsRevoluteJoint "PedalPlateRJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 0.5
+            float drive:angular:physics:maxForce = 20
+            float drive:angular:physics:stiffness = 6
+            float drive:angular:physics:targetPosition = 9.594069
+            float drive:angular:physics:targetVelocity = 0
+            uniform token physics:axis = "X"
+            rel physics:body0 = </Cabin/Floor>
+            rel physics:body1 = </Cabin/PedalR/PedalPlateR>
+            point3f physics:localPos0 = (0.054166667, 0.23127842, 0.50087416)
+            point3f physics:localPos1 = (0, -0.5, -0.5)
+            float physics:lowerLimit = 0
+            float physics:upperLimit = 9.594069
+        }
     }
 }
 

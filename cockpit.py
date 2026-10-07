@@ -4,12 +4,13 @@
   - 회색 밀폐 부스 + 사무용 의자(등받이·팔걸이) + 착석 A3 로봇
     (raise_a3_ultra_t3d0/ 를 reference로 포함)
   - 조이스틱 2자유도 회전 조인트 아큘레이션 2개(짐벌 X+Y, 스프링 복원 드라이브)
-  - 페달 판 2개(안식각으로 저장됨)
+  - 페달 판 2개(1-DOF 리볼루트 조인트, 뒷모서리 힌지, 스프링 복원 드라이브)
 
 런타임:
   - 스틱: 드라이브 목표각을 쓰고 관절각을 "측정값"으로 읽는다.
     구동은 set_stick_articulations 로 주입된 Isaac Lab 핸들이 담당.
-  - 페달: 답압량에 따라 판 각도를 직접 갱신(애셋 프림 transform 오버라이드).
+  - 페달: 답압량에 따라 관절 드라이브 목표각을 기록(안식각→수평).
+    물리 발로 밟아도(접촉력>스프링) 수평까지 눌린다.
 """
 
 import math
@@ -20,7 +21,7 @@ from pxr import UsdGeom, UsdPhysics
 
 import config as C
 from input_source import Command
-from usd_utils import attach_op, get_op, quat_axis_angle, set_xform
+from usd_utils import get_op, set_xform
 
 DEFAULT_ASSET = Path(__file__).resolve().parent / "assets" / "cockpit.usd"
 """조종실 USD 애셋 경로(필수 - 없으면 오류로 종료)."""
@@ -70,15 +71,11 @@ class CockpitRig:
         if not stage.GetPrimAtPath(p("StickL")).HasAPI(UsdPhysics.ArticulationRootAPI):
             raise RuntimeError(f"조종실 애셋에 조이스틱 아큘레이션이 없습니다: {usd_asset}")
 
-        self._pedal_l = attach_op(stage, p("PedalPlateL"))
-        self._pedal_r = attach_op(stage, p("PedalPlateR"))
-
-        # 페달 판의 안식 위치는 애셋에 저장돼 있으므로 읽어 갱신 수학의 기준점으로 쓴다.
-        def local_pos(name):
-            m = get_op(stage.GetPrimAtPath(p(name))).Get()  # 매트릭스 op(로컬)
-            return np.array([m[3][0], m[3][1], m[3][2]])
-
-        self._pedal_pos = {"L": local_pos("PedalPlateL"), "R": local_pos("PedalPlateR")}
+        # 페달: 애셋의 1-DOF 리볼루트 조인트 프림(드라이브 목표각을 기록)
+        self._pedal_joints = [stage.GetPrimAtPath(p(f"Pedal{n}/PedalPlate{n}Joint")) for n in ["L", "R"]]
+        for jp in self._pedal_joints:
+            if not jp.IsValid() or not jp.HasAPI(UsdPhysics.DriveAPI):
+                raise RuntimeError(f"페달 조인트가 없거나 드라이브가 없습니다: {jp.GetPath()}")
         self.update(1.0 / 120.0, Command())  # 초기 자세 배치
         print(f"[cockpit] USD 애셋 로드: {usd_asset} | 조이스틱 아큘레이션")
 
@@ -112,12 +109,9 @@ class CockpitRig:
             self._drive_stick(self._stick_arts[1], self._stick_joint_ids[1],
                               -float(np.clip(cmd.rz, -1.0, 1.0)) * tilt, 0.0)
 
-        # 2) 페달 2: 안식 = 앞엣지(B) 부상, 답압 = B가 내려와 뒤엣지(A)와 같은
-        #    높이(수평)로. 판은 뒤엣지를 축으로 회전하므로 중심 높이도 함께 조정.
-        #    주의: set_xform이 스케일을 덮어쓰므로 PEDAL_SIZE를 항상 함께 넘긴다.
+        # 2) 페달 2(1-DOF 리볼루트): 답압량만큼 드라이브 목표각을 안식각→수평(0°)으로.
+        #    물리적으로 발이 닿아 눌러도 같은 한계 안에서 움직인다(스프링 복원).
         press = float(np.clip(cmd.pedal, 0.0, 1.0))
-        theta = PEDAL_TILT_REST * (1.0 - press)
-        quat = quat_axis_angle((1.0, 0.0, 0.0), theta)
-        z = FLOOR_TOP + 0.5 * PEDAL_SIZE[2] + 0.5 * PEDAL_SIZE[1] * math.sin(theta)
-        set_xform(self._pedal_l, (self._pedal_pos["L"][0], self._pedal_pos["L"][1], z), quat, PEDAL_SIZE)
-        set_xform(self._pedal_r, (self._pedal_pos["R"][0], self._pedal_pos["R"][1], z), quat, PEDAL_SIZE)
+        target_deg = math.degrees(PEDAL_TILT_REST) * (1.0 - press)
+        for jp in self._pedal_joints:
+            jp.GetAttribute("drive:angular:physics:targetPosition").Set(target_deg)
