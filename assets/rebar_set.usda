@@ -1,0 +1,714 @@
+#usda 1.0
+(
+    defaultPrim = "RebarSet"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "RebarSet"
+{
+    def "Looks"
+    {
+        def Material "RebarMat0"
+        {
+            token outputs:surface.connect = </RebarSet/Looks/RebarMat0/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.5, 0.3, 0.15)
+                float inputs:metallic = 0.35
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "RebarMat1"
+        {
+            token outputs:surface.connect = </RebarSet/Looks/RebarMat1/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.58, 0.4, 0.22)
+                float inputs:metallic = 0.35
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "RebarMat2"
+        {
+            token outputs:surface.connect = </RebarSet/Looks/RebarMat2/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.42, 0.24, 0.13)
+                float inputs:metallic = 0.35
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "BentMat"
+        {
+            token outputs:surface.connect = </RebarSet/Looks/BentMat/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.36, 0.41, 0.48)
+                float inputs:metallic = 0.7
+                float inputs:roughness = 0.45
+                token outputs:surface
+            }
+        }
+    }
+
+    def Capsule "rebar_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat0>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.015010892209128546, 0.9998873302103022, 0), (0, -0.9998873302103022, -0.015010892209128546, 0), (3.865888552038783, -3.038972572390192, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat1>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.032969161553619175, 0.9994563694261253, 0), (0, -0.9994563694261253, 0.032969161553619175, 0), (3.8420066513964493, -2.7550578621841493, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_2" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat2>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.059333294968837325, 0.9982382281340167, 0), (0, -0.9982382281340167, 0.059333294968837325, 0), (3.862849136735311, -2.4781172228499178, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_3" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat0>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.0038477961639099556, 0.9999925972049398, 0), (0, -0.9999925972049398, 0.0038477961639099556, 0), (3.8421212970727727, -2.218862975515969, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_4" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat1>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.029411407534039258, 0.9995673909781504, 0), (0, -0.9995673909781504, 0.029411407534039258, 0), (3.847803052235306, -1.9298180696416816, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_5" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat2>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.006419638154030238, 0.9999793939106802, 0), (0, -0.9999793939106802, -0.006419638154030238, 0), (5.019820011337376, -3.0382935232314496, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_6" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat0>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.01466098226612278, 0.9998925220237385, 0), (0, -0.9998925220237385, -0.01466098226612278, 0), (5.019558405907276, -2.781387652070576, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_7" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat1>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.040763258488634824, 0.9991688329593696, 0), (0, -0.9991688329593696, 0.040763258488634824, 0), (5.004501584170921, -2.5082423196815444, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_8" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat2>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.05568954107277557, 0.9984481333625216, 0), (0, -0.9984481333625216, 0.05568954107277557, 0), (5.0005955528108545, -2.2113517589869884, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_9" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat0>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.05003922681310291, 0.9987472532027044, 0), (0, -0.9987472532027044, -0.05003922681310291, 0), (5.00516905017964, -1.929435294136019, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_10" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat1>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.00037518774397737875, 0.999999929617076, 0), (0, -0.999999929617076, 0.00037518774397737875, 0), (6.139900596881094, -3.0695282389782994, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_11" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat2>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.036903361394202916, 0.9993188389687294, 0), (0, -0.9993188389687294, 0.036903361394202916, 0), (6.157681284835274, -2.7819757310405198, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_12" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat0>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.015655003204786744, 0.9998774529284369, 0), (0, -0.9998774529284369, 0.015655003204786744, 0), (6.1301493696820835, -2.47679809080793, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_13" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat1>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.041452789462270156, 0.9991404637215916, 0), (0, -0.9991404637215916, 0.041452789462270156, 0), (6.140703972182552, -2.1947867138407666, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "rebar_14" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        double height = 1.168
+        rel material:binding = </RebarSet/Looks/RebarMat2>
+        float physics:mass = 7.5
+        double radius = 0.016
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.0011748969139093735, 0.9999993098083827, 0), (0, -0.9999993098083827, -0.0011748969139093735, 0), (6.163886009854635, -1.9244113133222986, 1.028, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Xform "rebar_15" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.051681628073125374, -0.998663611693002, 0, 0), (0.998663611693002, -0.051681628073125374, 0, 0), (0, 0, 1, 0), (3.774486815189137, -2.4506274143482134, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9432437542959389, -0.33210121948241006, 0), (0, 0.33210121948241006, -0.9432437542959389, 0), (-0, 0.0875086713336151, -0.2485447292569797, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_16" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (0.6906574666888254, -0.7231820405036162, 0, 0), (0.7231820405036162, 0.6906574666888254, 0, 0), (0, 0, 1, 0), (4.583792177042473, -2.382179119351344, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9801272541550929, 0.19836977003162015, 0), (0, -0.19836977003162015, -0.9801272541550929, 0), (-0, -0.052270434403331956, -0.258263531469867, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_17" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.7609435327285099, 0.6488181101037913, 0, 0), (-0.6488181101037913, -0.7609435327285099, 0, 0), (0, 0, 1, 0), (4.46910903877462, -2.919760325115458, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7591374130351278, -0.6509304019097079, 0), (0, 0.6509304019097079, -0.7591374130351278, 0), (-0, 0.17152016090320807, -0.20003270833475617, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_18" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.7265821270137478, 0.6870796261745646, 0, 0), (-0.6870796261745646, -0.7265821270137478, 0, 0), (0, 0, 1, 0), (6.436243653233665, -2.3920099683872675, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.8981418227282847, -0.439705886094688, 0), (0, 0.439705886094688, -0.8981418227282847, 0), (-0, 0.11586250098595026, -0.236660370288903, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_19" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.6470723413846962, -0.7624286097825341, 0, 0), (0.7624286097825341, -0.6470723413846962, 0, 0), (0, 0, 1, 0), (5.529350731438365, -2.9190543769979573, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9670093250111793, -0.25474097695781756, 0), (0, 0.25474097695781756, -0.9670093250111793, 0), (-0, 0.06712424742838499, -0.25480695714044577, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_20" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (0.06552458289288465, 0.9978509553218424, 0, 0), (-0.9978509553218424, 0.06552458289288465, 0, 0), (0, 0, 1, 0), (4.707494894311945, -2.983955087281905, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.6289477425759782, -0.7774475783669155, 0), (0, 0.7774475783669155, -0.6289477425759782, 0), (-0, 0.2048574368996822, -0.16572773016877027, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_21" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (0.21811848480167273, 0.9759222953636332, 0, 0), (-0.9759222953636332, 0.21811848480167273, 0, 0), (0, 0, 1, 0), (5.515295487833855, -2.7394959022251157, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7122512191997643, -0.7019246403628023, 0), (0, 0.7019246403628023, -0.7122512191997643, 0), (-0, 0.1849571427355984, -0.1876781962591379, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_22" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.5240259558300022, -0.8517022940068046, 0, 0), (0.8517022940068046, -0.5240259558300022, 0, 0), (0, 0, 1, 0), (3.894847447424917, -2.0859108149505365, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.6500535064888935, -0.7598884383259783, 0), (0, 0.7598884383259783, -0.6500535064888935, 0), (-0, 0.20023060349889527, -0.17128909895982347, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_23" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (0.8232358969170823, -0.5676994433915952, 0, 0), (0.5676994433915952, 0.8232358969170823, 0, 0), (0, 0, 1, 0), (5.209157443577832, -2.925448055486888, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9992064868739876, 0.03982959438587855, 0), (0, -0.03982959438587855, -0.9992064868739876, 0), (-0, -0.010495098120679506, -0.2632909092912957, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_24" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (0.8991460587544658, -0.437648677624314, 0, 0), (0.437648677624314, 0.8991460587544658, 0, 0), (0, 0, 1, 0), (5.156979463001791, -2.883337001861306, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7037942065829987, -0.7104039096036895, 0), (0, 0.7104039096036895, -0.7037942065829987, 0), (-0, 0.18719143018057233, -0.18544977343462007, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_25" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.6297839711842048, -0.7767703326205585, 0, 0), (0.7767703326205585, -0.6297839711842048, 0, 0), (0, 0, 1, 0), (5.209082823421424, -2.648454596644096, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.975381912892034, -0.22052238889300294, 0), (0, 0.22052238889300294, -0.975381912892034, 0), (-0, 0.05810764947330639, -0.2570131340470509, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_26" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (0.0659932290690397, 0.9978200708128901, 0, 0), (-0.9978200708128901, 0.0659932290690397, 0, 0), (0, 0, 1, 0), (3.6141718600737174, -2.048537430268875, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9581065271404223, -0.2864120853786012, 0), (0, 0.2864120853786012, -0.9581065271404223, 0), (-0, 0.07546958449726149, -0.25246106990150124, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_27" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.9555428880898538, -0.29485214772984564, 0, 0), (0.29485214772984564, -0.9555428880898538, 0, 0), (0, 0, 1, 0), (4.466489929340676, -2.1984100961740864, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9712046895860167, 0.23824661786923496, 0), (0, -0.23824661786923496, -0.9712046895860167, 0), (-0, -0.0627779838085434, -0.2559124357059154, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_28" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.6944913487024802, 0.7195010539098674, 0, 0), (-0.7195010539098674, -0.6944913487024802, 0, 0), (0, 0, 1, 0), (3.591050883152335, -2.9525294773539885, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.6295817584631991, -0.776934237506873, 0), (0, 0.776934237506873, -0.6295817584631991, 0), (-0, 0.204722171583061, -0.165894793355053, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "rebar_29" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 5.8
+        matrix4d xformOp:transform = ( (-0.5476528496115793, -0.8367056569142564, 0, 0), (0.8367056569142564, -0.5476528496115793, 0, 0), (0, 0, 1, 0), (4.784660739168444, -2.4715118705074235, 1.032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.588
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.31, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.495
+            rel material:binding = </RebarSet/Looks/BentMat>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7133182893821159, -0.7008402228988951, 0), (0, 0.7008402228988951, -0.7133182893821159, 0), (-0, 0.18467139873385888, -0.1879593692521873, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+}
+

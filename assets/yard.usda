@@ -1,0 +1,2916 @@
+#usda 1.0
+(
+    defaultPrim = "Yard"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "Yard"
+{
+    def "Looks"
+    {
+        def Material "PaintYellow"
+        {
+            token outputs:surface.connect = </Yard/Looks/PaintYellow/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.85, 0.68, 0.05)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "PaintWhite"
+        {
+            token outputs:surface.connect = </Yard/Looks/PaintWhite/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.88, 0.88, 0.86)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "Concrete"
+        {
+            token outputs:surface.connect = </Yard/Looks/Concrete/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.42, 0.43, 0.45)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.9
+                token outputs:surface
+            }
+        }
+
+        def Material "SteelBlue"
+        {
+            token outputs:surface.connect = </Yard/Looks/SteelBlue/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.3, 0.38, 0.48)
+                float inputs:metallic = 0.6
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Dark"
+        {
+            token outputs:surface.connect = </Yard/Looks/Dark/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.12, 0.12, 0.14)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.7
+                token outputs:surface
+            }
+        }
+
+        def Material "Rust"
+        {
+            token outputs:surface.connect = </Yard/Looks/Rust/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.45, 0.24, 0.12)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.85
+                token outputs:surface
+            }
+        }
+
+        def Material "GlowWhite"
+        {
+            token outputs:surface.connect = </Yard/Looks/GlowWhite/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.9, 0.9, 0.95)
+                color3f inputs:emissiveColor = (0.9, 0.9, 0.95)
+                float inputs:emissiveIntensity = 2
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "LampGreen"
+        {
+            token outputs:surface.connect = </Yard/Looks/LampGreen/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.1, 0.7, 0.3)
+                color3f inputs:emissiveColor = (0.1, 0.8, 0.35)
+                float inputs:emissiveIntensity = 3
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone0_Paint"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone0_Paint/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.4468, 0.7361, 0.63875)
+                color3f inputs:emissiveColor = (0.176, 0.702, 0.525)
+                float inputs:emissiveIntensity = 0.06
+                float inputs:metallic = 0
+                float inputs:opacity = 0.9
+                float inputs:roughness = 0.85
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone0_Edge"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone0_Edge/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.176, 0.702, 0.525)
+                color3f inputs:emissiveColor = (0.176, 0.702, 0.525)
+                float inputs:emissiveIntensity = 0.9
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone0_Post"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone0_Post/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.1, 0.1, 0.12)
+                color3f inputs:emissiveColor = (0.176, 0.702, 0.525)
+                float inputs:emissiveIntensity = 2.5
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone1_Paint"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone1_Paint/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.87195, 0.71465, 0.47705)
+                color3f inputs:emissiveColor = (0.949, 0.663, 0.231)
+                float inputs:emissiveIntensity = 0.06
+                float inputs:metallic = 0
+                float inputs:opacity = 0.9
+                float inputs:roughness = 0.85
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone1_Edge"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone1_Edge/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.949, 0.663, 0.231)
+                color3f inputs:emissiveColor = (0.949, 0.663, 0.231)
+                float inputs:emissiveIntensity = 0.9
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone1_Post"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone1_Post/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.1, 0.1, 0.12)
+                color3f inputs:emissiveColor = (0.949, 0.663, 0.231)
+                float inputs:emissiveIntensity = 2.5
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone2_Paint"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone2_Paint/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.65855, 0.64095, 0.86315)
+                color3f inputs:emissiveColor = (0.561, 0.529, 0.933)
+                float inputs:emissiveIntensity = 0.06
+                float inputs:metallic = 0
+                float inputs:opacity = 0.9
+                float inputs:roughness = 0.85
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone2_Edge"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone2_Edge/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.561, 0.529, 0.933)
+                color3f inputs:emissiveColor = (0.561, 0.529, 0.933)
+                float inputs:emissiveIntensity = 0.9
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone2_Post"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone2_Post/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.1, 0.1, 0.12)
+                color3f inputs:emissiveColor = (0.561, 0.529, 0.933)
+                float inputs:emissiveIntensity = 2.5
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone3_Paint"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone3_Paint/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.5095, 0.6844, 0.8549)
+                color3f inputs:emissiveColor = (0.29, 0.608, 0.918)
+                float inputs:emissiveIntensity = 0.06
+                float inputs:metallic = 0
+                float inputs:opacity = 0.9
+                float inputs:roughness = 0.85
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone3_Edge"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone3_Edge/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.29, 0.608, 0.918)
+                color3f inputs:emissiveColor = (0.29, 0.608, 0.918)
+                float inputs:emissiveIntensity = 0.9
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Zone3_Post"
+        {
+            token outputs:surface.connect = </Yard/Looks/Zone3_Post/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.1, 0.1, 0.12)
+                color3f inputs:emissiveColor = (0.29, 0.608, 0.918)
+                float inputs:emissiveIntensity = 2.5
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "M_Board"
+        {
+            token outputs:surface.connect = </Yard/Looks/M_Board/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor.connect = </Yard/Looks/M_Board/Texture.outputs:rgb>
+                color3f inputs:emissiveColor = (1, 1, 1)
+                float inputs:emissiveIntensity = 0.4
+                token outputs:surface
+            }
+
+            def Shader "UVReader"
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                string inputs:varname = "st"
+                float2 outputs:result
+            }
+
+            def Shader "Texture"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @/home/ubuntu/IsaacLab/crane_teleop_demo/assets/textures/aimos_board.png@
+                token inputs:sourceColorSpace = "sRGB"
+                float2 inputs:st.connect = </Yard/Looks/M_Board/UVReader.outputs:result>
+                token inputs:wrapS = "clamp"
+                token inputs:wrapT = "clamp"
+                color3f outputs:rgb
+            }
+        }
+
+        def Material "M_FloorLabel"
+        {
+            token outputs:surface.connect = </Yard/Looks/M_FloorLabel/Surface.outputs:surface>
+
+            def Shader "Surface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor.connect = </Yard/Looks/M_FloorLabel/Texture.outputs:rgb>
+                float inputs:opacity = 0.95
+                token outputs:surface
+            }
+
+            def Shader "UVReader"
+            {
+                uniform token info:id = "UsdPrimvarReader_float2"
+                string inputs:varname = "st"
+                float2 outputs:result
+            }
+
+            def Shader "Texture"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @/home/ubuntu/IsaacLab/crane_teleop_demo/assets/textures/zone_HB.png@
+                token inputs:sourceColorSpace = "sRGB"
+                float2 inputs:st.connect = </Yard/Looks/M_FloorLabel/UVReader.outputs:result>
+                token inputs:wrapS = "clamp"
+                token inputs:wrapT = "clamp"
+                color3f outputs:rgb
+            }
+        }
+
+        def Material "Window"
+        {
+            token outputs:surface.connect = </Yard/Looks/Window/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.16, 0.22, 0.3)
+                color3f inputs:emissiveColor = (0.35, 0.5, 0.75)
+                float inputs:emissiveIntensity = 0.5
+                float inputs:metallic = 0.4
+                float inputs:roughness = 0.2
+                token outputs:surface
+            }
+        }
+
+        def Material "MillDoor"
+        {
+            token outputs:surface.connect = </Yard/Looks/MillDoor/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.35, 0.38, 0.42)
+                float inputs:metallic = 0.4
+                float inputs:roughness = 0.7
+                token outputs:surface
+            }
+        }
+
+        def Material "FurnaceGlow"
+        {
+            token outputs:surface.connect = </Yard/Looks/FurnaceGlow/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 0.45, 0.12)
+                color3f inputs:emissiveColor = (1, 0.42, 0.1)
+                float inputs:emissiveIntensity = 2.5
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Coil"
+        {
+            token outputs:surface.connect = </Yard/Looks/Coil/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.48, 0.52, 0.58)
+                float inputs:metallic = 0.85
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+
+        def Material "CoilHole"
+        {
+            token outputs:surface.connect = </Yard/Looks/CoilHole/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.08, 0.08, 0.09)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.9
+                token outputs:surface
+            }
+        }
+
+        def Material "Rail"
+        {
+            token outputs:surface.connect = </Yard/Looks/Rail/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.75, 0.22, 0.12)
+                float inputs:metallic = 0.5
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Barrier"
+        {
+            token outputs:surface.connect = </Yard/Looks/Barrier/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.72, 0.73, 0.75)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "Drum0"
+        {
+            token outputs:surface.connect = </Yard/Looks/Drum0/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.15, 0.35, 0.6)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.6
+                token outputs:surface
+            }
+        }
+
+        def Material "Drum1"
+        {
+            token outputs:surface.connect = </Yard/Looks/Drum1/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.6, 0.25, 0.1)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.6
+                token outputs:surface
+            }
+        }
+
+        def Material "Drum2"
+        {
+            token outputs:surface.connect = </Yard/Looks/Drum2/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.2, 0.2, 0.22)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.6
+                token outputs:surface
+            }
+        }
+
+        def Material "Tyre"
+        {
+            token outputs:surface.connect = </Yard/Looks/Tyre/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.06, 0.06, 0.07)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.95
+                token outputs:surface
+            }
+        }
+
+        def Material "Hub"
+        {
+            token outputs:surface.connect = </Yard/Looks/Hub/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.55, 0.57, 0.6)
+                float inputs:metallic = 0.8
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Zone_LA"
+    {
+        def Cube "Paint"
+        {
+            rel material:binding = </Yard/Looks/Zone0_Paint>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.004, 0), (10.575, 1.45, 0.003, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0"
+        {
+            rel material:binding = </Yard/Looks/Zone0_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (10.575, 2.525, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1"
+        {
+            rel material:binding = </Yard/Looks/Zone0_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (10.575, 0.375, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge2"
+        {
+            rel material:binding = </Yard/Looks/Zone0_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (9.225, 1.45, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge3"
+        {
+            rel material:binding = </Yard/Looks/Zone0_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (11.924999999999999, 1.45, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Post0"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (9.225, 2.525, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone0_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post1"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.924999999999999, 2.525, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone0_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post2"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (9.225, 0.375, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone0_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post3"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.924999999999999, 0.375, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone0_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Mesh "Board"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_Board>
+            point3f[] points = [(-0.525, 0, 0.16), (0.525, 0, 0.16), (0.525, 0, -0.16), (-0.525, 0, -0.16)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (10.575, 2.505, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "BoardBack"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.11, 0, 0, 0), (0, 0.02, 0, 0), (0, 0, 0.38, 0), (10.575, 2.4899999999999998, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_10095"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (10.094999999999999, 2.505, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_11055"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.055, 2.505, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Mesh "FloorLabel"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_FloorLabel>
+            point3f[] points = [(-0.8, 0, 0.24), (0.8, 0, 0.24), (0.8, 0, -0.24), (-0.8, 0, -0.24)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (10.575, 1.45, 0.006, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Zone_LB"
+    {
+        def Cube "Paint"
+        {
+            rel material:binding = </Yard/Looks/Zone1_Paint>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.004, 0), (13.425, 1.45, 0.003, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0"
+        {
+            rel material:binding = </Yard/Looks/Zone1_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (13.425, 2.525, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1"
+        {
+            rel material:binding = </Yard/Looks/Zone1_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (13.425, 0.375, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge2"
+        {
+            rel material:binding = </Yard/Looks/Zone1_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (12.075000000000001, 1.45, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge3"
+        {
+            rel material:binding = </Yard/Looks/Zone1_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (14.775, 1.45, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Post0"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (12.075000000000001, 2.525, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone1_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post1"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (14.775, 2.525, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone1_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post2"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (12.075000000000001, 0.375, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone1_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post3"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (14.775, 0.375, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone1_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Mesh "Board"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_Board>
+            point3f[] points = [(-0.525, 0, 0.16), (0.525, 0, 0.16), (0.525, 0, -0.16), (-0.525, 0, -0.16)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (13.425, 2.505, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "BoardBack"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.11, 0, 0, 0), (0, 0.02, 0, 0), (0, 0, 0.38, 0), (13.425, 2.4899999999999998, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_12945"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (12.945, 2.505, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_13905"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (13.905000000000001, 2.505, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Mesh "FloorLabel"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_FloorLabel>
+            point3f[] points = [(-0.8, 0, 0.24), (0.8, 0, 0.24), (0.8, 0, -0.24), (-0.8, 0, -0.24)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (13.425, 1.45, 0.006, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Zone_HA"
+    {
+        def Cube "Paint"
+        {
+            rel material:binding = </Yard/Looks/Zone2_Paint>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.004, 0), (10.575, 3.75, 0.003, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0"
+        {
+            rel material:binding = </Yard/Looks/Zone2_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (10.575, 4.825, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1"
+        {
+            rel material:binding = </Yard/Looks/Zone2_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (10.575, 2.675, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge2"
+        {
+            rel material:binding = </Yard/Looks/Zone2_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (9.225, 3.75, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge3"
+        {
+            rel material:binding = </Yard/Looks/Zone2_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (11.924999999999999, 3.75, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Post0"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (9.225, 4.825, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone2_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post1"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.924999999999999, 4.825, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone2_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post2"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (9.225, 2.675, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone2_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post3"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.924999999999999, 2.675, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone2_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Mesh "Board"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_Board>
+            point3f[] points = [(-0.525, 0, 0.16), (0.525, 0, 0.16), (0.525, 0, -0.16), (-0.525, 0, -0.16)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (10.575, 4.805000000000001, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "BoardBack"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.11, 0, 0, 0), (0, 0.02, 0, 0), (0, 0, 0.38, 0), (10.575, 4.79, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_10095"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (10.094999999999999, 4.805000000000001, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_11055"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.055, 4.805000000000001, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Mesh "FloorLabel"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_FloorLabel>
+            point3f[] points = [(-0.8, 0, 0.24), (0.8, 0, 0.24), (0.8, 0, -0.24), (-0.8, 0, -0.24)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (10.575, 3.75, 0.006, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Zone_HB"
+    {
+        def Cube "Paint"
+        {
+            rel material:binding = </Yard/Looks/Zone3_Paint>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.004, 0), (13.425, 3.75, 0.003, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0"
+        {
+            rel material:binding = </Yard/Looks/Zone3_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (13.425, 4.825, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1"
+        {
+            rel material:binding = </Yard/Looks/Zone3_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.7, 0, 0, 0), (0, 0.09, 0, 0), (0, 0, 0.01, 0), (13.425, 2.675, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge2"
+        {
+            rel material:binding = </Yard/Looks/Zone3_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (12.075000000000001, 3.75, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge3"
+        {
+            rel material:binding = </Yard/Looks/Zone3_Edge>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.09, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.01, 0), (14.775, 3.75, 0.008, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Post0"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (12.075000000000001, 4.825, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone3_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post1"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (14.775, 4.825, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone3_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post2"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (12.075000000000001, 2.675, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone3_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Post3"
+        {
+            uniform token axis = "Z"
+            double height = 0.55
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (14.775, 2.675, 0.275, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Sphere "Cap"
+            {
+                rel material:binding = </Yard/Looks/Zone3_Post>
+                double radius = 0.035
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.3, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Mesh "Board"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_Board>
+            point3f[] points = [(-0.525, 0, 0.16), (0.525, 0, 0.16), (0.525, 0, -0.16), (-0.525, 0, -0.16)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (13.425, 4.805000000000001, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "BoardBack"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.11, 0, 0, 0), (0, 0.02, 0, 0), (0, 0, 0.38, 0), (13.425, 4.79, 0.78, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_12945"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (12.945, 4.805000000000001, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "BoardPost_13905"
+        {
+            uniform token axis = "Z"
+            double height = 0.78
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.018
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (13.905000000000001, 4.805000000000001, 0.39, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Mesh "FloorLabel"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_FloorLabel>
+            point3f[] points = [(-0.8, 0, 0.24), (0.8, 0, 0.24), (0.8, 0, -0.24), (-0.8, 0, -0.24)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (13.425, 3.75, 0.006, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cube "ZoneBorder0"
+    {
+        rel material:binding = </Yard/Looks/PaintYellow>
+        double size = 1
+        matrix4d xformOp:transform = ( (6, 0, 0, 0), (0, 0.14, 0, 0), (0, 0, 0.006, 0), (12, 5.05, 0.006, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ZoneBorder1"
+    {
+        rel material:binding = </Yard/Looks/PaintYellow>
+        double size = 1
+        matrix4d xformOp:transform = ( (6, 0, 0, 0), (0, 0.14, 0, 0), (0, 0, 0.006, 0), (12, 0.15, 0.006, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ZoneBorder2"
+    {
+        rel material:binding = </Yard/Looks/PaintYellow>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 4.8999999999999995, 0, 0), (0, 0, 0.006, 0), (9, 2.6, 0.006, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "ZoneBorder3"
+    {
+        rel material:binding = </Yard/Looks/PaintYellow>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.14, 0, 0, 0), (0, 4.8999999999999995, 0, 0), (0, 0, 0.006, 0), (15, 2.6, 0.006, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def "AimosGate"
+    {
+        def Cube "Column0"
+        {
+            rel material:binding = </Yard/Looks/SteelBlue>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.26, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 5, 0), (3.6, 0.9, 2.5, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Foot0"
+        {
+            rel material:binding = </Yard/Looks/Concrete>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.6, 0, 0, 0), (0, 0.6, 0, 0), (0, 0, 0.1, 0), (3.6, 0.9, 0.05, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column1"
+        {
+            rel material:binding = </Yard/Looks/SteelBlue>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.26, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 5, 0), (6.4, 0.9, 2.5, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Foot1"
+        {
+            rel material:binding = </Yard/Looks/Concrete>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.6, 0, 0, 0), (0, 0.6, 0, 0), (0, 0, 0.1, 0), (6.4, 0.9, 0.05, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Beam"
+        {
+            rel material:binding = </Yard/Looks/SteelBlue>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3, 0, 0, 0), (0, 0.22, 0, 0), (0, 0, 0.3, 0), (5, 0.9, 5, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Housing"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.55, 0, 0, 0), (0, 0.3151564858234369, 0.15223793693893053, 0), (0, -0.18268552432671664, 0.37818778298812433, 0), (5, 0.9, 4.38, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "FlashRing"
+        {
+            uniform token axis = "Z"
+            double height = 0.05
+            rel material:binding = </Yard/Looks/GlowWhite>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.900447102352677, 0.4349655341112301, 0), (0, -0.4349655341112301, 0.900447102352677, 0), (5, 0.71, 4.38, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Lamp"
+        {
+            rel material:binding = </Yard/Looks/LampGreen>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.14, 0), (6.380000000000001, 0.9, 5.22, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Cabinet"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.45, 0, 0, 0), (0, 0.3, 0, 0), (0, 0, 0.9, 0), (3.25, 0.9, 0.45, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Mesh "Board"
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            rel material:binding = </Yard/Looks/M_Board>
+            point3f[] points = [(-0.85, 0, 0.18), (0.85, 0, 0.18), (0.85, 0, -0.18), (-0.85, 0, -0.18)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (5, 1.03, 4.98, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def RectLight "ScanLight"
+        {
+            color3f inputs:color = (0.8, 0.85, 1)
+            float inputs:height = 0.4
+            float inputs:intensity = 0
+            float inputs:width = 2
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 0.40673664307580015, 0.9135454576426009, 0), (0, -0.9135454576426009, 0.40673664307580015, 0), (5, 0.9, 4.38, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Mill"
+    {
+        def Cube "Wall" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Concrete>
+            double size = 1
+            matrix4d xformOp:transform = ( (4.7, 0, 0, 0), (0, 14, 0, 0), (0, 0, 9.5, 0), (-3.15, 0, 4.75, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_2_0"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, -1.5, 2.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_2_1"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, -1.5, 4.4, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_2_2"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, -1.5, 6.6, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_3_0"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, 0.7000000000000002, 2.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_3_1"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, 0.7000000000000002, 4.4, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_3_2"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, 0.7000000000000002, 6.6, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_5_0"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, 5.1, 2.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_5_1"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, 5.1, 4.4, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Win_5_2"
+        {
+            rel material:binding = </Yard/Looks/Window>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.1, 0), (-0.77, 5.1, 6.6, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Door0"
+        {
+            rel material:binding = </Yard/Looks/MillDoor>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.08, 0, 0, 0), (0, 1.8, 0, 0), (0, 0, 3.8, 0), (-0.77, -5.6, 1.9, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Door1"
+        {
+            rel material:binding = </Yard/Looks/MillDoor>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.08, 0, 0, 0), (0, 1.8, 0, 0), (0, 0, 3.8, 0), (-0.77, -3.6, 1.9, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Furnace"
+        {
+            rel material:binding = </Yard/Looks/MillDoor>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.16, 0, 0, 0), (0, 2, 0, 0), (0, 0, 3, 0), (-0.77, 3.2, 1.6, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "FurnaceGlow"
+        {
+            rel material:binding = </Yard/Looks/FurnaceGlow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.03, 0, 0, 0), (0, 1.4, 0, 0), (0, 0, 1.6, 0), (-0.68, 3.2, 1.4, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def RectLight "FurnaceLight"
+        {
+            color3f inputs:color = (1, 0.45, 0.15)
+            float inputs:height = 1.6
+            float inputs:intensity = 6
+            float inputs:width = 1.4
+            matrix4d xformOp:transform = ( (2.220446049250313e-16, 0, 1, 0), (0, 1, 0, 0), (-1, 0, 2.220446049250313e-16, 0), (-0.62, 3.2, 1.4, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Stack0"
+        {
+            uniform token axis = "Z"
+            double height = 3.5
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.45
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-4.3, -3, 11.25, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Stack1"
+        {
+            uniform token axis = "Z"
+            double height = 3.5
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.45
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-4.3, 3, 11.25, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "Coil0_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            rel material:binding = </Yard/Looks/Coil>
+            double radius = 0.52
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.1499999999999999, 1.2, 0.28, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cylinder "Hole"
+            {
+                uniform token axis = "Z"
+                double height = 0.52
+                rel material:binding = </Yard/Looks/CoilHole>
+                double radius = 0.26
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Coil0_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            rel material:binding = </Yard/Looks/Coil>
+            double radius = 0.52
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.1499999999999999, 1.2, 0.8, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cylinder "Hole"
+            {
+                uniform token axis = "Z"
+                double height = 0.52
+                rel material:binding = </Yard/Looks/CoilHole>
+                double radius = 0.26
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Coil0_2"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            rel material:binding = </Yard/Looks/Coil>
+            double radius = 0.52
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.1499999999999999, 1.2, 1.32, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cylinder "Hole"
+            {
+                uniform token axis = "Z"
+                double height = 0.52
+                rel material:binding = </Yard/Looks/CoilHole>
+                double radius = 0.26
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Coil1_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            rel material:binding = </Yard/Looks/Coil>
+            double radius = 0.52
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.1499999999999999, 3.2, 0.28, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cylinder "Hole"
+            {
+                uniform token axis = "Z"
+                double height = 0.52
+                rel material:binding = </Yard/Looks/CoilHole>
+                double radius = 0.26
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Coil1_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            rel material:binding = </Yard/Looks/Coil>
+            double radius = 0.52
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.1499999999999999, 3.2, 0.8, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cylinder "Hole"
+            {
+                uniform token axis = "Z"
+                double height = 0.52
+                rel material:binding = </Yard/Looks/CoilHole>
+                double radius = 0.26
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "Coil1_2"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            rel material:binding = </Yard/Looks/Coil>
+            double radius = 0.52
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.1499999999999999, 3.2, 1.32, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cylinder "Hole"
+            {
+                uniform token axis = "Z"
+                double height = 0.52
+                rel material:binding = </Yard/Looks/CoilHole>
+                double radius = 0.26
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Cylinder "RailPost0"
+        {
+            uniform token axis = "Z"
+            double height = 1
+            rel material:binding = </Yard/Looks/Rail>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.9, -6.9, 10, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "RailPost1"
+        {
+            uniform token axis = "Z"
+            double height = 1
+            rel material:binding = </Yard/Looks/Rail>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.9, -5.4, 10, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "RailPost2"
+        {
+            uniform token axis = "Z"
+            double height = 1
+            rel material:binding = </Yard/Looks/Rail>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.9, -3.9000000000000004, 10, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "RailPost3"
+        {
+            uniform token axis = "Z"
+            double height = 1
+            rel material:binding = </Yard/Looks/Rail>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.9, -2.4000000000000004, 10, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cylinder "RailPost4"
+        {
+            uniform token axis = "Z"
+            double height = 1
+            rel material:binding = </Yard/Looks/Rail>
+            double radius = 0.025
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.9, -0.9000000000000004, 10, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "RailBar0"
+        {
+            rel material:binding = </Yard/Looks/Rail>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.04, 0, 0, 0), (0, 13.8, 0, 0), (0, 0, 0.04, 0), (-0.9, 0, 10.35, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "RailBar1"
+        {
+            rel material:binding = </Yard/Looks/Rail>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.04, 0, 0, 0), (0, 13.8, 0, 0), (0, 0, 0.04, 0), (-0.9, 0, 10.95, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Lane"
+    {
+        def Cube "Dash0"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.35, 0, 0), (0, 0, 0.004, 0), (5, -6.9, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Dash1"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.35, 0, 0), (0, 0, 0.004, 0), (5, -6.28, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Dash2"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.35, 0, 0), (0, 0, 0.004, 0), (5, -5.66, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Dash3"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.35, 0, 0), (0, 0, 0.004, 0), (5, -5.040000000000001, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Dash4"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.35, 0, 0), (0, 0, 0.004, 0), (5, -4.42, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Dash5"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.12, 0, 0, 0), (0, 0.35, 0, 0), (0, 0, 0.004, 0), (5, -3.8000000000000003, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "StopLine"
+        {
+            rel material:binding = </Yard/Looks/PaintWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (2.6, 0, 0, 0), (0, 0.14, 0, 0), (0, 0, 0.004, 0), (5, -3.75, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0_0"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (3.7, -6.6, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0_1"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (3.7, -5.88, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0_2"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (3.7, -5.16, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0_3"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (3.7, -4.4399999999999995, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge0_4"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (3.7, -3.7199999999999998, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1_0"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (6.3, -6.6, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1_1"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (6.3, -5.88, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1_2"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (6.3, -5.16, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1_3"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (6.3, -4.4399999999999995, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Edge1_4"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1, 0, 0, 0), (0, 0.4, 0, 0), (0, 0, 0.004, 0), (6.3, -3.7199999999999998, 0.004, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier0"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (1.2, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (1.2, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier1"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (3, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (3, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier2"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (4.8, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (4.8, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier3"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (6.6000000000000005, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (6.6000000000000005, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier4"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (8.4, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (8.4, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier5"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (10.2, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (10.2, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier6"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (12, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (12, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier7"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (13.799999999999999, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (13.799999999999999, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier8"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (15.6, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (15.6, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier9"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.6, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 0.4, 0), (17.4, -7.55, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (1.5, 0, 0, 0), (0, 0.26, 0, 0), (0, 0, 0.16, 0), (17.4, -7.55, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier10"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, -6, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, -6, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier11"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, -4.2, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, -4.2, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier12"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, -2.4000000000000004, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, -2.4000000000000004, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier13"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, -0.6000000000000005, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, -0.6000000000000005, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier14"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, 1.1999999999999993, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, 1.1999999999999993, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier15"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, 3, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, 3, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "Barrier16"
+    {
+        def Cube "Base" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </Yard/Looks/Barrier>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.552713678800501e-16, 1.6, 0, 0), (-0.34, 7.549516567451065e-17, 0, 0), (0, 0, 0.4, 0), (17.55, 4.799999999999999, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Top"
+        {
+            rel material:binding = </Yard/Looks/PaintYellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (3.3306690738754696e-16, 1.5, 0, 0), (-0.26, 5.773159728050814e-17, 0, 0), (0, 0, 0.16, 0), (17.55, 4.799999999999999, 0.48, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Drum0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.9
+        rel material:binding = </Yard/Looks/Drum0>
+        double radius = 0.3
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (16.4, -5.9, 0.45, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Rim"
+        {
+            uniform token axis = "Z"
+            double height = 0.06
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.31
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Drum1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.9
+        rel material:binding = </Yard/Looks/Drum1>
+        double radius = 0.3
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (16.8, -5.35, 0.45, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Rim"
+        {
+            uniform token axis = "Z"
+            double height = 0.06
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.31
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Drum2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.9
+        rel material:binding = </Yard/Looks/Drum2>
+        double radius = 0.3
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (16.15, -4.95, 0.45, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Rim"
+        {
+            uniform token axis = "Z"
+            double height = 0.06
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.31
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.2, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Tyre0_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.16
+        rel material:binding = </Yard/Looks/Tyre>
+        double radius = 0.34
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.7, 5.8, 0.08, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre0_1"
+    {
+        uniform token axis = "Z"
+        double height = 0.16
+        rel material:binding = </Yard/Looks/Tyre>
+        double radius = 0.34
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.7, 5.8, 0.25, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre0_hub"
+    {
+        uniform token axis = "Z"
+        double height = 0.38
+        rel material:binding = </Yard/Looks/Hub>
+        double radius = 0.14
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.7, 5.8, 0.19, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre1_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.16
+        rel material:binding = </Yard/Looks/Tyre>
+        double radius = 0.34
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (16.35, 5.45, 0.08, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre1_1"
+    {
+        uniform token axis = "Z"
+        double height = 0.16
+        rel material:binding = </Yard/Looks/Tyre>
+        double radius = 0.34
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (16.35, 5.45, 0.25, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre1_hub"
+    {
+        uniform token axis = "Z"
+        double height = 0.38
+        rel material:binding = </Yard/Looks/Hub>
+        double radius = 0.14
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (16.35, 5.45, 0.19, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre2_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Z"
+        double height = 0.16
+        rel material:binding = </Yard/Looks/Tyre>
+        double radius = 0.34
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.4, 5, 0.08, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre2_1"
+    {
+        uniform token axis = "Z"
+        double height = 0.16
+        rel material:binding = </Yard/Looks/Tyre>
+        double radius = 0.34
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.4, 5, 0.25, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Tyre2_hub"
+    {
+        uniform token axis = "Z"
+        double height = 0.38
+        rel material:binding = </Yard/Looks/Hub>
+        double radius = 0.14
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.4, 5, 0.19, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def "CCTV0"
+    {
+        def Cylinder "Pole"
+        {
+            uniform token axis = "Z"
+            double height = 3
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.05
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.2, -6.9, 1.5, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Head"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.11554698608735496, 0.07904994627530496, 0, 0), (-0.1693927420185106, 0.24760068447290345, 0, 0), (0, 0, 0.14, 0), (0.2, -6.9, 3.05, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Lens"
+        {
+            rel material:binding = </Yard/Looks/GlowWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.1320536983855485, 0.09034279574320567, 0, 0), (-0.03387854840370212, 0.049520136894580694, 0, 0), (0, 0, 0.08, 0), (0.2, -6.9, 3.05, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def "CCTV1"
+    {
+        def Cylinder "Pole"
+        {
+            uniform token axis = "Z"
+            double height = 3
+            rel material:binding = </Yard/Looks/Dark>
+            double radius = 0.05
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (17.6, 6.7, 1.5, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Head"
+        {
+            rel material:binding = </Yard/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (-0.11554698608735503, -0.07904994627530494, 0, 0), (0.16939274201851057, -0.2476006844729036, 0, 0), (0, 0, 0.14, 0), (17.6, 6.7, 3.05, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Lens"
+        {
+            rel material:binding = </Yard/Looks/GlowWhite>
+            double size = 1
+            matrix4d xformOp:transform = ( (-0.1320536983855486, -0.09034279574320564, 0, 0), (0.033878548403702115, -0.049520136894580714, 0, 0), (0, 0, 0.08, 0), (17.6, 6.7, 3.05, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cube "UtilityBox" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Yard/Looks/SteelBlue>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.7, 0, 0, 0), (0, 0.5, 0, 0), (0, 0, 1.2, 0), (0.55, 6.2, 0.6, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Xform "Scrap0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.6910682158908875, 0.7227895412811296, 0, 0), (-0.7227895412811296, 0.6910682158908875, 0, 0), (0, 0, 1, 0), (1.5992778624401152, 4.101498357623358, 0.06775113014929471, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9439591692322615, 0.3300622468903989, 0), (0, -0.3300622468903989, -0.9439591692322615, 0), (-0, -0.08416587295705176, -0.2407095881542267, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.8999840310246117, -0.4359228646225049, 0, 0), (0.4359228646225049, 0.8999840310246117, 0, 0), (0, 0, 1, 0), (1.1704205761541968, 3.629773949399298, 0.12462603113556595, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.719858546683839, -0.694120791192881, 0), (0, 0.694120791192881, -0.719858546683839, 0), (-0, 0.17700080175418462, -0.183563929404379, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.6799216978786045, 0.7332847228422774, 0, 0), (-0.7332847228422774, -0.6799216978786045, 0, 0), (0, 0, 1, 0), (1.6113900218032629, 4.162842952516799, 0.06655616874403464, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.999182990729045, 0.040414737878171576, 0), (0, -0.040414737878171576, -0.999182990729045, 0), (-0, -0.010305758158933625, -0.25479166263590647, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.23674071186204293, -0.9715728667202751, 0, 0), (0.9715728667202751, 0.23674071186204293, 0, 0), (0, 0, 1, 0), (1.7703605841024839, 4.01238231348316, 0.11588903226440316, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.8200560371330192, -0.572283230543835, 0), (0, 0.572283230543835, -0.8200560371330192, 0), (-0, 0.14593222378867798, -0.20911428946891988, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.9928178338658701, -0.11963590079019631, 0, 0), (0.11963590079019631, 0.9928178338658701, 0, 0), (0, 0, 1, 0), (1.304509461330045, 4.0537303628652275, 0.09239298260725377, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9781239342007777, -0.20802300195794227, 0), (0, 0.20802300195794227, -0.9781239342007777, 0), (-0, 0.053045865499275445, -0.2494216032211981, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.8389146917013146, -0.5442629328253837, 0, 0), (0.5442629328253837, -0.8389146917013146, 0, 0), (0, 0, 1, 0), (1.3353012316675805, 4.302202683778484, 0.06545116054734212, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7838192220365896, -0.6209890716960769, 0), (0, 0.6209890716960769, -0.7838192220365896, 0), (-0, 0.15835221328249957, -0.1998739016193304, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.9786754917345246, 0.20541246767951202, 0, 0), (-0.20541246767951202, -0.9786754917345246, 0, 0), (0, 0, 1, 0), (1.3771448925337044, 3.5831169977352424, 0.10159384304574025, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7620411323628198, -0.6475286191259748, 0), (0, 0.6475286191259748, -0.7620411323628198, 0), (-0, 0.16511979787712372, -0.19432048875251887, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap7" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.5994585923751619, 0.8004057696116323, 0, 0), (-0.8004057696116323, 0.5994585923751619, 0, 0), (0, 0, 1, 0), (1.7733623572759107, 3.702216027788038, 0.07605779089022338, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7577612366573354, -0.6525319212264992, 0), (0, 0.6525319212264992, -0.7577612366573354, 0), (-0, 0.16639563991275724, -0.1932291153476205, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap8" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.9784841904780477, 0.2063218092798715, 0, 0), (-0.2063218092798715, 0.9784841904780477, 0, 0), (0, 0, 1, 0), (1.3007689541612195, 3.8457478737556396, 0.15873612066746728, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9816448764559471, -0.19071795019816157, 0), (0, 0.19071795019816157, -0.9816448764559471, 0), (-0, 0.04863307730053126, -0.2503194434962665, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap9" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.3247430429462894, -0.9458022816942157, 0, 0), (0.9458022816942157, -0.3247430429462894, 0, 0), (0, 0, 1, 0), (1.4393206607424454, 3.516877215097498, 0.16957230506476045, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.984020824910298, 0.17805340811918396, 0), (0, -0.17805340811918396, -0.984020824910298, 0), (-0, -0.045403619070391955, -0.250925310352126, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap10" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.9681378193015071, 0.25041797626792384, 0, 0), (-0.25041797626792384, -0.9681378193015071, 0, 0), (0, 0, 1, 0), (1.7910399163187594, 3.5546680614018378, 0.15150681277340688, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9460630829176186, 0.3239824735080779, 0), (0, -0.3239824735080779, -0.9460630829176186, 0), (-0, -0.08261553074455986, -0.24124608614399257, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap11" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.8513838162178264, -0.5245432274678324, 0, 0), (0.5245432274678324, -0.8513838162178264, 0, 0), (0, 0, 1, 0), (1.408709743204562, 3.8173766382813374, 0.07072035213302905, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9654291380720246, 0.26066564668461306, 0), (0, -0.26066564668461306, -0.9654291380720246, 0), (-0, -0.06646973990457632, -0.2461844302083663, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap12" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.9880918180635876, 0.15386539271647165, 0, 0), (-0.15386539271647165, 0.9880918180635876, 0, 0), (0, 0, 1, 0), (1.9391248483727819, 3.9663031972031653, 0.13870962488404304, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9762988919513313, 0.21642660089416568, 0), (0, -0.21642660089416568, -0.9762988919513313, 0), (-0, -0.05518878322801218, -0.24895621744758953, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap13" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.33487572819465794, 0.9422623024753232, 0, 0), (-0.9422623024753232, 0.33487572819465794, 0, 0), (0, 0, 1, 0), (1.1619202351484526, 4.098392107324038, 0.05323320936616434, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7621860740805395, -0.6473580064212504, 0), (0, 0.6473580064212504, -0.7621860740805395, 0), (-0, 0.16507629163741883, -0.19435744889053738, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap14" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.3395417317745262, -0.9405909910176452, 0, 0), (0.9405909910176452, 0.3395417317745262, 0, 0), (0, 0, 1, 0), (1.2901700167283408, 3.5929014216365474, 0.08515700804145032, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9396323991851647, 0.3421855555126945, 0), (0, -0.3421855555126945, -0.9396323991851647, 0), (-0, -0.08725731665573719, -0.23960626179221695, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Scrap15" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.1433159576605405, -0.9896769858291352, 0, 0), (0.9896769858291352, -0.1433159576605405, 0, 0), (0, 0, 1, 0), (1.5931789510081171, 4.352919994454528, 0.0878219296572118, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.568
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.3, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.478
+            rel material:binding = </Yard/Looks/Rust>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9939404155955054, 0.10992019944411419, 0), (0, -0.10992019944411419, -0.9939404155955054, 0), (-0, -0.028029650858249048, -0.2534548059768539, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+}
+

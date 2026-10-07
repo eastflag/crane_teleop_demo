@@ -1,15 +1,17 @@
 """조종실: 회색 부스 외관 + 사무용 의자(등받이·팔걸이) + 조이스틱 2 + 페달 2 + 착석 로봇.
 
-설계 의도(PoC):
+설계 의도:
   - 외관은 drawing/cockpit1_flat.png 참고: 회색 밀폐 부스, 앞면이 뒤로 기운 큰 창,
     왼쪽 벽 모니터. 그림의 로봇/사람은 무시.
   - 의자는 등받이 + 좌우 손받침대(팔걸이)가 있는 사무용 의자. 팔걸이 위에 주황색
     조이스틱 2개, 의자 바로 앞 바닥에 주황색 페달 2개(그림에서 주황색 = 조작 장치).
+  - 조이스틱은 2자유도 회전 조인트 아큘레이션(짐벌 X축+Y축, 스프링 복원 드라이브).
+    런타임은 드라이브 목표각을 쓰고 관절각을 "측정값"으로 읽는다(v2 로드맵 1번).
+    아큘레이션 핸들이 없으면(애셋 빌더 등) 정적 프림으로만 생성한다.
   - 매네킹 대신 raise_a3_ultra_t3d0(AgiBot A3 Ultra) 로봇이 의자에 앉는다.
     인터페이스 USD(Physics=physx 변형)를 reference로 가져와 리지드바디+관절
     드라이브가 구성되고, 물리 레이어의 관절 프레임으로 순운동학(FK)을 계산한
-    착석 포즈를 초기 자세+드라이브 목표로 굽는다. 로봇은 허벅지가 시트에
-    얹히는 높이로 스폰되어 중력에 의해 의자에 안착한다(시트·바닥은 정적 충돌체).
+    착석 포즈를 초기 자세+드라이브 목표로 굽는다.
   - 캐빈은 월드에 고정된 독립 계층 → 크레인이 움직여도 조종실은 정지한다.
   - 캐빈 구조물은 USD 애셋(assets/cockpit.usd)으로 분리하고, 런타임에는
     reference로 로드만 한다. 애셋이 없으면 절차적 생성으로 폴백.
@@ -24,6 +26,7 @@ from pathlib import Path
 import numpy as np
 from pxr import Gf, Sdf, Usd, UsdGeom, UsdPhysics
 
+import config as C
 from input_source import Command
 from usd_utils import (
     attach_capsule, attach_op, box, capsule, cylinder, get_op, group,
@@ -261,11 +264,63 @@ def add_sitting_robot(stage, parent_path, pelvis_y=-0.05):
     return fit
 
 
+# ═══════════════════════ 조이스틱 아큘레이션(2자유도 회전) ═══════════════════════
+def build_stick_articulation(stage, base_path, pivot):
+    """팔걸이 위 조이스틱 1개 = 짐벌 2단 회전 조인트 아큘레이션.
+
+    계층: base(고정, 원점=pivot) ─ TiltX(X축 회전 링크) ─ TiltY(Y축 회전 링크)
+          TiltY 아래에 샤프트+손잡이 메시. 각 단은 각드라이브(스프링 복원)를 가진다.
+    조인트 각 0 = 수직. 런타임은 drive 목표각을 쓰고 관절각을 측정값으로 읽는다.
+    """
+    root = UsdGeom.Xform.Define(stage, base_path)
+    UsdPhysics.ArticulationRootAPI.Apply(root.GetPrim())
+    m = Gf.Matrix4d()
+    m.SetTranslate(Gf.Vec3d(*[float(v) for v in pivot]))
+    root.AddTransformOp().Set(m)
+
+    # 고정 베이스 링크(더미): 아큘레이션에서 world 직결 조인트는 무시되므로
+    # 베이스→TiltX 조인트로 첫 축을 만든다.
+    base = UsdGeom.Xform.Define(stage, f"{base_path}/Base")
+    UsdPhysics.RigidBodyAPI.Apply(base.GetPrim())
+    UsdPhysics.MassAPI.Apply(base.GetPrim()).CreateMassAttr(0.01)
+
+    tilt_x = UsdGeom.Xform.Define(stage, f"{base_path}/TiltX")
+    UsdPhysics.RigidBodyAPI.Apply(tilt_x.GetPrim())
+    UsdPhysics.MassAPI.Apply(tilt_x.GetPrim()).CreateMassAttr(0.10)
+    tilt_y = UsdGeom.Xform.Define(stage, f"{base_path}/TiltY")
+    UsdPhysics.RigidBodyAPI.Apply(tilt_y.GetPrim())
+    UsdPhysics.MassAPI.Apply(tilt_y.GetPrim()).CreateMassAttr(0.15)
+
+    def revolute(name, body0, body1, axis):
+        joint = UsdPhysics.RevoluteJoint.Define(stage, f"{base_path}/{name}")
+        if body0 is not None:
+            joint.CreateBody0Rel().SetTargets([f"{base_path}/{body0}"])
+        joint.CreateBody1Rel().SetTargets([f"{base_path}/{body1}"])
+        joint.CreateAxisAttr(axis)
+        joint.CreateLowerLimitAttr(-0.6)
+        joint.CreateUpperLimitAttr(0.6)
+        drive = UsdPhysics.DriveAPI.Apply(joint.GetPrim(), "angular")
+        drive.CreateTargetPositionAttr(0.0)
+        drive.CreateTargetVelocityAttr(0.0)
+        drive.CreateMaxForceAttr(C.STICK_DRIVE[2])
+        drive.CreateStiffnessAttr(C.STICK_DRIVE[0])
+        drive.CreateDampingAttr(C.STICK_DRIVE[1])
+        joint.CreateLocalPos0Attr(Gf.Vec3f(0.0, 0.0, 0.0))
+        joint.CreateLocalPos1Attr(Gf.Vec3f(0.0, 0.0, 0.0))
+        return joint
+
+    revolute("TiltXJoint", "Base", "TiltX", "X")        # 전후 기울기
+    revolute("TiltYJoint", "TiltX", "TiltY", "Y")       # 좌우 기울기
+    return base_path
+
+
 # ═══════════════════════ 조종실 릭 ═══════════════════════
 class CockpitRig:
     def __init__(self, stage, parent_path, usd_asset="auto", root_pos=CABIN_POS):
         """usd_asset: "auto"(애셋 있으면 로드, 없으면 생성) | 경로(강제 로드) | None(강제 생성)."""
         self.root = f"{parent_path}/Cabin"
+        self._stick_arts = None            # (좌 아큘레이션, 우 아큘레이션) - set_stick_articulations
+        self._stick_joint_ids = None       # 각 스틱의 [TiltXJoint, TiltYJoint] 인덱스
         if usd_asset == "auto":
             usd_asset = str(DEFAULT_ASSET) if DEFAULT_ASSET.is_file() else None
         if usd_asset:
@@ -282,10 +337,14 @@ class CockpitRig:
         def p(name):  # 애셋 내부 프림 경로(_build와 이름 동일)
             return f"{self.root}/{name}"
 
-        self._shaft_l = attach_capsule(stage, p("StickShaftL"))
-        self._shaft_r = attach_capsule(stage, p("StickShaftR"))
-        self._knob_l = attach_op(stage, p("KnobL"))
-        self._knob_r = attach_op(stage, p("KnobR"))
+        # 조이스틱: 애셋이 아큘레이션이면 관절 경로만 기억(구동은 set_stick_articulations
+        # 로 주입된 Isaac Lab 핸들이 담당). 구형 애셋이면 정적 프림 폴백.
+        self._stick_articulated = stage.GetPrimAtPath(p("StickL")).HasAPI(UsdPhysics.ArticulationRootAPI)
+        if not self._stick_articulated:
+            self._shaft_l = attach_capsule(stage, p("StickShaftL"))
+            self._shaft_r = attach_capsule(stage, p("StickShaftR"))
+            self._knob_l = attach_op(stage, p("KnobL"))
+            self._knob_r = attach_op(stage, p("KnobR"))
         self._pedal_l = attach_op(stage, p("PedalPlateL"))
         self._pedal_r = attach_op(stage, p("PedalPlateR"))
 
@@ -295,12 +354,17 @@ class CockpitRig:
             m = get_op(stage.GetPrimAtPath(p(name))).Get()  # 매트릭스 op(로컬)
             return np.array([m[3][0], m[3][1], m[3][2]])
 
-        knob_l0, knob_r0 = local_pos("KnobL"), local_pos("KnobR")
-        self._pivot = {"L": knob_l0 - np.array([0.0, 0.0, STICK_H]),
-                       "R": knob_r0 - np.array([0.0, 0.0, STICK_H])}
+        if self._stick_articulated:
+            # 아큘레이션 루트의 로컬 이동이 곧 피벗 위치
+            self._pivot = {"L": local_pos("StickL"), "R": local_pos("StickR")}
+        else:
+            knob_l0, knob_r0 = local_pos("KnobL"), local_pos("KnobR")
+            self._pivot = {"L": knob_l0 - np.array([0.0, 0.0, STICK_H]),
+                           "R": knob_r0 - np.array([0.0, 0.0, STICK_H])}
         self._pedal_pos = {"L": local_pos("PedalPlateL"), "R": local_pos("PedalPlateR")}
         self.update(1.0 / 120.0, Command())  # 초기 자세 배치
-        print(f"[cockpit] USD 애셋 로드: {usd_asset}")
+        mode = "조이스틱 아큘레이션" if self._stick_articulated else "정적 스틱(구형 애셋)"
+        print(f"[cockpit] USD 애셋 로드: {usd_asset} | {mode}")
 
     # ─────────────── 절차적 생성 모드(애셋 생성 스크립트가 사용) ───────────────
     def _build(self, stage, root_pos):
@@ -359,15 +423,21 @@ class CockpitRig:
                 pos=(x_arm, py - 0.14, (seat_top + arm_z) / 2), scale=(0.05, 0.05, arm_z - seat_top))
 
         # ── 조이스틱 2(거치대 위, 주황) - 거치대 앞쪽(피벗 y = py+0.35) ──
+        # 각 스틱은 2자유도 회전 조인트 아큘레이션(짐벌 X+Y, 스프링 복원 드라이브).
         self._pivot = {"L": np.array([-0.36, py + 0.35, arm_z]), "R": np.array([0.36, py + 0.35, arm_z])}  # 거치대와 같은 간격(±0.36)
+        self._stick_articulated = True
         for side in ("L", "R"):
             pivot = self._pivot[side]
             cylinder(stage, f"{self.root}/StickBase{side}", radius=0.045, height=0.035,
                      mat=mats["orange"], pos=tuple(pivot + np.array([0, 0, 0.018])))
-        self._shaft_l = capsule(stage, f"{self.root}/StickShaftL", radius=0.012, height=STICK_H, mat=mats["orange"])
-        self._shaft_r = capsule(stage, f"{self.root}/StickShaftR", radius=0.012, height=STICK_H, mat=mats["orange"])
-        self._knob_l = sphere(stage, f"{self.root}/KnobL", radius=0.030, mat=mats["orange"], pos=tuple(self._pivot["L"]))
-        self._knob_r = sphere(stage, f"{self.root}/KnobR", radius=0.030, mat=mats["orange"], pos=tuple(self._pivot["R"]))
+            build_stick_articulation(stage, f"{self.root}/Stick{side}", tuple(pivot))
+            # 샤프트+손잡이는 TiltY 링크의 자식(관절각 0 = 수직)
+            inner = f"{self.root}/Stick{side}/TiltY"
+            capsule(stage, f"{inner}/Shaft", radius=0.012, height=STICK_H - 0.024,
+                    mat=mats["orange"], pos=(0.0, 0.0, STICK_H / 2.0))
+            sphere(stage, f"{inner}/Knob", radius=0.030, mat=mats["orange"], pos=(0.0, 0.0, STICK_H))
+            cylinder(stage, f"{inner}/Boot", radius=0.020, height=0.05, mat=mats["seat"],
+                     pos=(0.0, 0.0, 0.025))
 
         # ── 페달 2(의자 바로 앞, 주황) - 뒤엣지(A)는 바닥, 앞엣지(B) 부상 안식각.
         #    판 중심 높이도 기울기에 맞춰 잡아 뒤엣지가 항상 바닥에 붙게 한다. ──
@@ -392,14 +462,42 @@ class CockpitRig:
             print(f"[cockpit] 로봇 착석 계측: {fit['diagnostics']}")
 
     # ───────────────────────── 메인 갱신 ─────────────────────────
+    def set_stick_articulations(self, stick_l, stick_r):
+        """Isaac Lab 아큘레이션 핸들 주입(데모에서 InteractiveScene 생성 후 호출)."""
+        import torch  # 아큘레이션 핸들 경로 - 앱 실행 이후에만 import 가능
+        self._torch = torch
+        self._stick_arts = (stick_l, stick_r)
+        self._stick_joint_ids = []
+        for art in self._stick_arts:
+            ids, names = art.find_joints(["TiltXJoint", "TiltYJoint"])
+            assert len(ids) == 2, f"스틱 조인트 발견 실패: {names}"
+            self._stick_joint_ids.append(ids)
+
+    def _drive_stick(self, art, ids, tilt_x, tilt_y):
+        """스틱 1개의 짐벌 목표각 기록+커밋. tilt_x=전후(ly/rz), tilt_y=좌우(lx)."""
+        target = self._torch.tensor([[tilt_x, tilt_y]], dtype=self._torch.float, device=art.device)
+        art.set_joint_position_target(target, joint_ids=ids)
+        art.write_data_to_sim()
+
     def update(self, dt, cmd: Command):
-        # 1) 스틱: 명령 → 손잡이 위치 (기울기 비율 0.55). 로봇은 정적(PoC).
-        knob_l = self._pivot["L"] + STICK_H * self._tilt_dir(cmd.lx, cmd.ly)
-        knob_r = self._pivot["R"] + STICK_H * self._tilt_dir(0.0, cmd.rz)
-        place_segment(self._shaft_l, self._pivot["L"], knob_l)
-        place_segment(self._shaft_r, self._pivot["R"], knob_r)
-        set_xform(self._knob_l, knob_l)
-        set_xform(self._knob_r, knob_r)
+        # 1) 스틱: 명령 → 짐벌 목표각. 관절각 부호는 손잡이가 명령 방향으로 기울도록
+        #    (+ly=북 → X축 -회전, +lx=동 → Y축 +회전, 레거시 _tilt_dir과 동일 규약).
+        if self._stick_arts is not None:
+            tilt = C.STICK_MAX_TILT
+            self._drive_stick(self._stick_arts[0], self._stick_joint_ids[0],
+                              -float(np.clip(cmd.ly, -1.0, 1.0)) * tilt,
+                              float(np.clip(cmd.lx, -1.0, 1.0)) * tilt)
+            self._drive_stick(self._stick_arts[1], self._stick_joint_ids[1],
+                              -float(np.clip(cmd.rz, -1.0, 1.0)) * tilt, 0.0)
+        elif getattr(self, "_stick_articulated", False):
+            pass  # 아큘레이션 애셋이지만 핸들 미주입(애셋 빌더 등) - 물리가 중립 유지
+        else:
+            knob_l = self._pivot["L"] + STICK_H * self._tilt_dir(cmd.lx, cmd.ly)
+            knob_r = self._pivot["R"] + STICK_H * self._tilt_dir(0.0, cmd.rz)
+            place_segment(self._shaft_l, self._pivot["L"], knob_l)
+            place_segment(self._shaft_r, self._pivot["R"], knob_r)
+            set_xform(self._knob_l, knob_l)
+            set_xform(self._knob_r, knob_r)
 
         # 2) 페달 2: 안식 = 앞엣지(B) 부상, 답압 = B가 내려와 뒤엣지(A)와 같은
         #    높이(수평)로. 판은 뒤엣지를 축으로 회전하므로 중심 높이도 함께 조정.

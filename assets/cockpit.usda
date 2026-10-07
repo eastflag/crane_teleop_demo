@@ -752,6 +752,98 @@ def Xform "Cabin"
         uniform token[] xformOpOrder = ["xformOp:transform"]
     }
 
+    def Xform "StickL" (
+        prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.36, 0.3, -0.5424816497663743, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Xform "Base" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 0.01
+        }
+
+        def Xform "TiltX" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 0.1
+        }
+
+        def Xform "TiltY" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 0.15
+
+            def Capsule "Shaft"
+            {
+                double height = 0.07600000000000001
+                rel material:binding = </Cabin/Looks/Orange>
+                double radius = 0.012
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.05, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Sphere "Knob"
+            {
+                rel material:binding = </Cabin/Looks/Orange>
+                double radius = 0.03
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.1, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "Boot"
+            {
+                uniform token axis = "Z"
+                double height = 0.05
+                rel material:binding = </Cabin/Looks/Seat>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.025, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def PhysicsRevoluteJoint "TiltXJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 0.3
+            float drive:angular:physics:maxForce = 15
+            float drive:angular:physics:stiffness = 2.5
+            float drive:angular:physics:targetPosition = 0
+            float drive:angular:physics:targetVelocity = 0
+            uniform token physics:axis = "X"
+            rel physics:body0 = </Cabin/StickL/Base>
+            rel physics:body1 = </Cabin/StickL/TiltX>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            float physics:lowerLimit = -0.6
+            float physics:upperLimit = 0.6
+        }
+
+        def PhysicsRevoluteJoint "TiltYJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 0.3
+            float drive:angular:physics:maxForce = 15
+            float drive:angular:physics:stiffness = 2.5
+            float drive:angular:physics:targetPosition = 0
+            float drive:angular:physics:targetVelocity = 0
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </Cabin/StickL/TiltX>
+            rel physics:body1 = </Cabin/StickL/TiltY>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            float physics:lowerLimit = -0.6
+            float physics:upperLimit = 0.6
+        }
+    }
+
     def Cylinder "StickBaseR"
     {
         uniform token axis = "Z"
@@ -762,38 +854,96 @@ def Xform "Cabin"
         uniform token[] xformOpOrder = ["xformOp:transform"]
     }
 
-    def Capsule "StickShaftL"
+    def Xform "StickR" (
+        prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+    )
     {
-        double height = 0.07599999999999998
-        rel material:binding = </Cabin/Looks/Orange>
-        double radius = 0.012
-        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.36, 0.3, -0.49248164976637426, 1) )
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.36, 0.3, -0.5424816497663743, 1) )
         uniform token[] xformOpOrder = ["xformOp:transform"]
-    }
 
-    def Capsule "StickShaftR"
-    {
-        double height = 0.07599999999999998
-        rel material:binding = </Cabin/Looks/Orange>
-        double radius = 0.012
-        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.36, 0.3, -0.49248164976637426, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
-    }
+        def Xform "Base" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 0.01
+        }
 
-    def Sphere "KnobL"
-    {
-        rel material:binding = </Cabin/Looks/Orange>
-        double radius = 0.03
-        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (-0.36, 0.3, -0.4424816497663743, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
-    }
+        def Xform "TiltX" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 0.1
+        }
 
-    def Sphere "KnobR"
-    {
-        rel material:binding = </Cabin/Looks/Orange>
-        double radius = 0.03
-        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0.36, 0.3, -0.4424816497663743, 1) )
-        uniform token[] xformOpOrder = ["xformOp:transform"]
+        def Xform "TiltY" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 0.15
+
+            def Capsule "Shaft"
+            {
+                double height = 0.07600000000000001
+                rel material:binding = </Cabin/Looks/Orange>
+                double radius = 0.012
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.05, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Sphere "Knob"
+            {
+                rel material:binding = </Cabin/Looks/Orange>
+                double radius = 0.03
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.1, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "Boot"
+            {
+                uniform token axis = "Z"
+                double height = 0.05
+                rel material:binding = </Cabin/Looks/Seat>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.025, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def PhysicsRevoluteJoint "TiltXJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 0.3
+            float drive:angular:physics:maxForce = 15
+            float drive:angular:physics:stiffness = 2.5
+            float drive:angular:physics:targetPosition = 0
+            float drive:angular:physics:targetVelocity = 0
+            uniform token physics:axis = "X"
+            rel physics:body0 = </Cabin/StickR/Base>
+            rel physics:body1 = </Cabin/StickR/TiltX>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            float physics:lowerLimit = -0.6
+            float physics:upperLimit = 0.6
+        }
+
+        def PhysicsRevoluteJoint "TiltYJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+        )
+        {
+            float drive:angular:physics:damping = 0.3
+            float drive:angular:physics:maxForce = 15
+            float drive:angular:physics:stiffness = 2.5
+            float drive:angular:physics:targetPosition = 0
+            float drive:angular:physics:targetVelocity = 0
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </Cabin/StickR/TiltX>
+            rel physics:body1 = </Cabin/StickR/TiltY>
+            point3f physics:localPos0 = (0, 0, 0)
+            point3f physics:localPos1 = (0, 0, 0)
+            float physics:lowerLimit = -0.6
+            float physics:upperLimit = 0.6
+        }
     }
 
     def Cube "PedalBaseL"

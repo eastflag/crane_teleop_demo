@@ -1,10 +1,11 @@
 """입력 소스: 게임패드 / 스크립트(자동 파일럿). 스틱 필터(데드존·커브·스무딩) 포함.
 
-명령 규약:
-  lx  왼쪽 스틱 X  (-1~1, +1 = 동쪽)   → 크레인 X
-  ly  왼쪽 스틱 Y  (-1~1, +1 = 북쪽)   → 크레인 Y
-  rz  오른쪽 스틱 Y (-1~1, +1 = 상승)  → 후크 Z
-  pedal 패들 (0/1, 1 = 자석 해제)
+명령 규약(웹 페이지 시나리오와 동일한 축 배치):
+  lx  왼쪽 스틱 X  (-1~1, +1 = 동쪽)   → 크레인 X(횡행)
+  ly  왼쪽 스틱 Y  (-1~1, +1 = 북쪽)   → 크레인 Y(주행)
+  rz  오른쪽 스틱 Y (-1~1, +1 = 상승)  → 후크 Z(권상)
+  pedal 브레이크 페달 (0/1, 1 = 크레인 정지)
+  mag   자석 토글 (0/1, 상승 에지에서만 1 - 전자석 ON/OFF)
 """
 import numpy as np
 
@@ -12,13 +13,14 @@ import config as C
 
 
 class Command:
-    __slots__ = ("lx", "ly", "rz", "pedal")
+    __slots__ = ("lx", "ly", "rz", "pedal", "mag")
 
-    def __init__(self, lx=0.0, ly=0.0, rz=0.0, pedal=0.0):
+    def __init__(self, lx=0.0, ly=0.0, rz=0.0, pedal=0.0, mag=0.0):
         self.lx = lx
         self.ly = ly
         self.rz = rz
         self.pedal = pedal
+        self.mag = mag
 
 
 class StickFilter:
@@ -60,6 +62,7 @@ class GamepadSource:
         "ly":    ("/left_stick_y", "/axis_left_y", "ly"),
         "rz":    ("/right_stick_y", "/axis_right_y", "ry"),
         "pedal": ("/right_trigger", "/trigger_right", "/a", "/button_a"),
+        "mag":   ("/b", "/button_b", "/x", "/button_x"),
     }
 
     def __init__(self):
@@ -67,6 +70,7 @@ class GamepadSource:
         self._pad = Gamepad()
         self._filter = StickFilter()
         self._printed_keys = False
+        self._mag_prev = 0.0
 
     def poll(self, dt, state=None):
         data = {}
@@ -87,7 +91,11 @@ class GamepadSource:
         ]
         lx, ly, rz = self._filter(raw)
         pedal = 1.0 if self._get(data, "pedal") > 0.5 else 0.0
-        return Command(lx, ly, rz, pedal)
+        # 자석은 토글: 버튼 상승 에지에서만 1
+        mag_now = 1.0 if self._get(data, "mag") > 0.5 else 0.0
+        mag = 1.0 if (mag_now > 0.5 and self._mag_prev <= 0.5) else 0.0
+        self._mag_prev = mag_now
+        return Command(lx, ly, rz, pedal, mag)
 
     def _get(self, data, name):
         for key in self.AXIS_KEYS[name]:
@@ -106,36 +114,70 @@ class GamepadSource:
 
 # ═══════════════════════ 스크립트(자동 파일럿) ═══════════════════════
 class ScriptedSource:
-    """하드웨어 없이 전체 사이클(픽업→운반→패들 해제→복귀)을 반복 검증하는 자동 조종.
+    """하드웨어 없이 전체 사이클(픽업→운반→자석 해제→판정→복귀)을 반복 검증하는 자동 조종.
 
-    크레인 상태(state: x, y, z)를 받아 목표 지점으로 P제어하는 스틱 명령을 만든다.
+    웹 페이지 시나리오처럼 트럭의 분철을 집어 등급 구역(중량A/B·경량A/B)에
+    차례로 하차한다. 크레인 상태(state: x, y, z)를 받아 목표 지점으로 P제어하는
+    스틱 명령을 만든다.
     """
 
     def __init__(self):
         # 자동 파일럿은 물리 스틱이 아니므로 데드존/커브 없이 스무딩만 건다.
         # (데드존을 걸면 P제어 명령이 목표 근처에서 데드존보다 작아져
-        #  정착 판정 거리 안에 영원히 도달하지 못하는 교착이 생긴다.)
+        #  정착 판정 거리 안에 영원히 도달하지 못하는 교찰이 생긴다.)
         self._filter = StickFilter(deadzone=0.0, curve=1.0)
         self.phase = "idle"
+        self.zone_cycle = 0          # 몇 번째 구역에 하차 중인지(0~3 순환)
+        self.zone_index = 0
+        self._pick_i = 0             # 트럭 적재 다발 위치 순환(중앙→서→동...)
         self._i = 0
         self._hold = 0.0
-        # (단계명, 목표 (x, y, hook_z), 정착 유지시간, 패들)
+        self._fresh_phase = True   # 페이즈 진입 첫 스텝(자석 토글 에지는 이때만)
+        self._build_phases()
+
+    def _zone_xy(self):
+        z = C.ZONES[self.zone_index]
+        return (z["cx"], z["cy"])
+
+    # 트럭 적재 다발 위치(자석 필드 반경 0.45m 안에 들어오도록 사이클마다 이동)
+    PICKUP_OFFSETS = ((0.0, 0.0), (-1.15, 0.0), (1.15, 0.0), (0.0, -0.55), (0.0, 0.55),
+                      (-0.6, 0.35), (0.6, -0.35), (-0.6, -0.35), (0.6, 0.35))
+
+    def _pickup_xy(self):
+        ox, oy = self.PICKUP_OFFSETS[self._pick_i % len(self.PICKUP_OFFSETS)]
+        return (C.TRUCK_XY[0] + ox, C.TRUCK_XY[1] + oy)
+
+    def _build_phases(self):
+        zx, zy = self._zone_xy()
+        px, py = self._pickup_xy()
+        # (단계명, 목표 (x, y, hook_z), 정착 유지시간, 브레이크, 자석토글에지)
         self.phases = [
-            ("goto_truck", (*C.TRUCK_XY, 4.5), 0.5, 0),
-            ("descend",    (*C.TRUCK_XY, 1.18), 1.0, 0),   # 자석 하단이 적재대 분철에 닿는 높이
-            ("settle",     (*C.TRUCK_XY, 1.18), 1.4, 0),   # 이 구간에서 분철 부착
-            ("lift",       (*C.TRUCK_XY, 4.5), 0.6, 0),
-            ("goto_jar",   (*C.JAR_XY, 3.5), 0.8, 0),
-            ("lower",      (*C.JAR_XY, 2.5), 0.8, 0),      # 2m 통 개구부 위(자석이 입구 밖)
-            ("release",    (*C.JAR_XY, 2.5), 1.3, 1),      # 패들 → 자석 해제, 투입
-            ("lift2",      (*C.JAR_XY, 4.0), 0.6, 0),
-            ("home",       (*C.CRANE_START[:2], 4.5), 0.8, 0),
+            ("goto_truck", (px, py, 4.5), 0.5, 0, 0),
+            ("descend",    (px, py, 1.18), 1.0, 0, 0),   # 자석 하단이 적재 분철에 접촉
+            ("settle",     (px, py, 1.18), 1.4, 0, 1),   # 자석 ON → 부착
+            ("lift",       (px, py, 4.5), 0.6, 0, 0),
+            ("goto_zone",  (zx, zy, 3.5), 0.8, 0, 0),         # 지정 구역 상공
+            ("lower",      (zx, zy, 1.0), 0.8, 0, 0),         # 구역 바닥 위로 하강
+            ("release",    (zx, zy, 1.0), 1.3, 0, 1),         # 자석 OFF → 낙하·판정
+            ("lift2",      (zx, zy, 4.0), 0.6, 0, 0),
+            ("home",       (C.CRANE_START[0], 0.0, 4.5), 0.8, 0, 0),
         ]
 
+    @property
+    def target_zone(self):
+        """현재 목표 구역 인덱스(데모의 판정 비교용)."""
+        return self.zone_index
+
     def poll(self, dt, state=None):
-        name, target, settle_t, pedal = self.phases[self._i]
+        name, target, settle_t, brake, mag = self.phases[self._i]
+        just_entered = self._fresh_phase
+        self._fresh_phase = False
         self.phase = name
         target = np.array(target, dtype=float)
+
+        if brake:
+            return Command(0.0, 0.0, 0.0, 1.0, 0.0)
+        edge = 1.0 if (mag and just_entered) else 0.0  # 토글은 페이즈 진입 시 1회
 
         if state:
             pos = np.array([state.get("x", target[0]), state.get("y", target[1]), state.get("z", target[2])])
@@ -153,11 +195,18 @@ class ScriptedSource:
         else:
             self._hold = 0.0
         if self._hold >= settle_t:
-            self._i = (self._i + 1) % len(self.phases)
+            self._i += 1
             self._hold = 0.0
+            self._fresh_phase = True
+            if self._i >= len(self.phases):   # 한 사이클 끝 → 다음 등급 구역으로
+                self._i = 0
+                self.zone_cycle += 1
+                self.zone_index = self.zone_cycle % len(C.ZONES)
+                self._pick_i += 1                # 다음 사이클은 다른 다발에서 픽업
+                self._build_phases()
 
         lx, ly, rz = self._filter(raw)
-        return Command(lx, ly, rz, float(pedal))
+        return Command(lx, ly, rz, 0.0, edge)
 
 
 # ═══════════════════════ 팩토리 ═══════════════════════

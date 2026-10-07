@@ -169,12 +169,12 @@ def cylinder(stage, path, radius, height, mat=None, pos=(0.0, 0.0, 0.0),
     return op
 
 
-def capsule(stage, path, radius, height, mat=None, pos=(0.0, 0.0, 0.0)):
+def capsule(stage, path, radius, height, mat=None, pos=(0.0, 0.0, 0.0), quat=(1.0, 0.0, 0.0, 0.0)):
     """가변 길이 캡슐(뼈대·와이어용). 반환값: (프림, transform op, height attr, 반지름)."""
     g = UsdGeom.Capsule.Define(stage, path)
     g.CreateRadiusAttr(float(radius))
     h_attr = g.CreateHeightAttr(float(height))
-    op = _make_op(g, pos, (1.0, 0.0, 0.0, 0.0), (1.0, 1.0, 1.0))
+    op = _make_op(g, pos, quat, (1.0, 1.0, 1.0))
     if mat:
         _bind(g, mat)
     return g, op, h_attr, radius

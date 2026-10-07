@@ -1,11 +1,11 @@
-"""전자석 로직: 근접 부착(키네마틱 용접) + 패들 밟으면 해제.
+"""전자석 로직: 근접 부착(키네마틱 용접) + 자석 OFF 시 해제.
 
-동작 규약:
-  - 자석이 무장 상태(패들을 밟지 않음)이고 철근이 자석 하부 필드 안에 오면 자동 부착.
+동작 규약(웹 페이지와 동일한 자석 ON/OFF 모델):
+  - 자석이 ON이면 하부 필드 안의 철근/분철이 자동 부착된다.
     실제 전자석처럼 살짝 떨어진 철근도 빨아들인다(근접 판정).
   - 부착된 철근은 매 스텝 자석 기준 상대 자세로 강제 이동(키네마틱 용접)되며,
     속도도 자석 속도로 기록되므로 해제 순간 관성이 자연스럽게 이어진다.
-  - 패들을 밟는 동안 자석이 해제 상태가 되어 모든 철근이 떨어진다.
+  - 자석을 OFF하면 모든 철근이 떨어진다(지정 구역 판정은 데모가 수행).
 
 v2 업그레이드 경로: 런타임 fixed joint 생성 또는 Isaac Lab의 attachable rigid
 object API로 교체하면 하중 질량이 크레인에 실리는 물리가 필요할 때 대응 가능.
@@ -23,8 +23,8 @@ class MagnetController:
         self.welded = {}  # 철근 인덱스 → (자석 기준 오프셋 np[3], 철근 자세 np[4])
 
     # ───────────────────────── 메인 갱신 ─────────────────────────
-    def update(self, dt, magnet_pos, magnet_vel, pedal):
-        if pedal > 0.5:
+    def update(self, dt, magnet_pos, magnet_vel, mag_on):
+        if not mag_on:
             self._release(magnet_vel)
         else:
             self._try_attach(np.asarray(magnet_pos, dtype=float))

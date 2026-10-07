@@ -1,0 +1,677 @@
+#usda 1.0
+(
+    defaultPrim = "CraneRoot"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "CraneRoot"
+{
+    def "Looks"
+    {
+        def Material "Yellow"
+        {
+            token outputs:surface.connect = </CraneRoot/Looks/Yellow/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.85, 0.66, 0.1)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Gray"
+        {
+            token outputs:surface.connect = </CraneRoot/Looks/Gray/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.3, 0.32, 0.36)
+                float inputs:metallic = 0.4
+                float inputs:roughness = 0.6
+                token outputs:surface
+            }
+        }
+
+        def Material "Dark"
+        {
+            token outputs:surface.connect = </CraneRoot/Looks/Dark/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.12, 0.12, 0.14)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.7
+                token outputs:surface
+            }
+        }
+
+        def Material "Red"
+        {
+            token outputs:surface.connect = </CraneRoot/Looks/Red/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.8, 0.15, 0.12)
+                float inputs:metallic = 0.5
+                float inputs:roughness = 0.4
+                token outputs:surface
+            }
+        }
+
+        def Material "MagnetRing"
+        {
+            token outputs:surface.connect = </CraneRoot/Looks/MagnetRing/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.2, 0.02, 0.02)
+                color3f inputs:emissiveColor = (1, 0.15, 0.1)
+                float inputs:emissiveIntensity = 1.2
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+    }
+
+    def "Fixed"
+    {
+        def Cube "RailBeam0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 15, 0, 0), (0, 0, 0.42, 0), (1, 0, 7.49, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column0_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (1, -6, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot0_0"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (1, -6, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column0_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (1, -3, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot0_1"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (1, -3, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column0_2" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (1, 0, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot0_2"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (1, 0, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column0_3" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (1, 3, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot0_3"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (1, 3, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column0_4" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (1, 6, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot0_4"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (1, 6, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Stop0_0"
+        {
+            rel material:binding = </CraneRoot/Looks/Red>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.3, 0), (1, -7.3, 7.8, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Stop0_1"
+        {
+            rel material:binding = </CraneRoot/Looks/Red>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.3, 0), (1, 7.3, 7.8, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "RailBeam1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Dark>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 15, 0, 0), (0, 0, 0.42, 0), (17, 0, 7.49, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column1_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (17, -6, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot1_0"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (17, -6, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column1_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (17, -3, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot1_1"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (17, -3, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column1_2" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (17, 0, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot1_2"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (17, 0, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column1_3" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (17, 3, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot1_3"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (17, 3, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Column1_4" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            rel material:binding = </CraneRoot/Looks/Yellow>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.34, 0, 0, 0), (0, 0.34, 0, 0), (0, 0, 7.28, 0), (17, 6, 3.64, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "ColFoot1_4"
+        {
+            rel material:binding = </CraneRoot/Looks/Gray>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.08, 0), (17, 6, 0.04, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Stop1_0"
+        {
+            rel material:binding = </CraneRoot/Looks/Red>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.3, 0), (17, -7.3, 7.8, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Cube "Stop1_1"
+        {
+            rel material:binding = </CraneRoot/Looks/Red>
+            double size = 1
+            matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.3, 0), (17, 7.3, 7.8, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "CraneArticulation" (
+        prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+    )
+    {
+        def Xform "Base" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 1
+        }
+
+        def Xform "Portal" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 2500
+
+            def Cube "Leg0"
+            {
+                rel material:binding = </CraneRoot/Looks/Yellow>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.44, 0, 0, 0), (0, 0.44, 0, 0), (0, 0, 0.62, 0), (1, 0, 8.01, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Leg1"
+            {
+                rel material:binding = </CraneRoot/Looks/Yellow>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.44, 0, 0, 0), (0, 0.44, 0, 0), (0, 0, 0.62, 0), (17, 0, 8.01, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Bridge"
+            {
+                rel material:binding = </CraneRoot/Looks/Yellow>
+                double size = 1
+                matrix4d xformOp:transform = ( (16.9, 0, 0, 0), (0, 0.62, 0, 0), (0, 0, 0.58, 0), (9, 0, 8.42, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Walkway"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (16.5, 0, 0, 0), (0, 0.7, 0, 0), (0, 0, 0.05, 0), (9, 0.42, 8.76, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost0"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (1.4, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost1"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (3.4124999999999996, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost2"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (5.424999999999999, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost3"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (7.4375, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost4"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (9.45, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost5"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (11.462499999999999, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost6"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (13.475, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost7"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (15.487499999999999, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "WPost8"
+            {
+                uniform token axis = "Z"
+                double height = 0.9
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (17.499999999999996, 0.74, 9.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "WRail0"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (16.5, 0, 0, 0), (0, 0.035, 0, 0), (0, 0, 0.035, 0), (9, 0.74, 9.05, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "WRail1"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (16.5, 0, 0, 0), (0, 0.035, 0, 0), (0, 0, 0.035, 0), (9, 0.74, 9.6, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Brace0"
+            {
+                rel material:binding = </CraneRoot/Looks/Yellow>
+                double size = 1
+                matrix4d xformOp:transform = ( (14.216551888000001, 0, -5.920274690907811, 0), (0, 0.1, 0, 0), (0.03844334214875203, 0, 0.09231527200000002, 0), (9, 0, 8, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Brace1"
+            {
+                rel material:binding = </CraneRoot/Looks/Yellow>
+                double size = 1
+                matrix4d xformOp:transform = ( (14.216551888000001, 0, 5.920274690907811, 0), (0, 0.1, 0, 0), (-0.03844334214875203, 0, 0.09231527200000002, 0), (9, 0, 8, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Xform "Trolley" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 400
+
+            def Cube "Body"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.95, 0, 0, 0), (0, 0.75, 0, 0), (0, 0, 0.5, 0), (0, 0, 7.45, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Drum"
+            {
+                rel material:binding = </CraneRoot/Looks/Dark>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.5, 0, 0, 0), (0, 0.42, 0, 0), (0, 0, 0.3, 0), (0, 0, 7.7700000000000005, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Motor"
+            {
+                rel material:binding = </CraneRoot/Looks/Dark>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.28, 0, 0, 0), (0, 0.28, 0, 0), (0, 0, 0.42, 0), (0.55, 0, 7.75, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Hanger0"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.7, 0, 0, 0), (0, 0.06, 0, 0), (0, 0, 0.42, 0), (0, -0.3, 7.970000000000001, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "Hanger1"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.7, 0, 0, 0), (0, 0.06, 0, 0), (0, 0, 0.42, 0), (0, 0.3, 7.970000000000001, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def Xform "Hook" (
+            prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+        )
+        {
+            float physics:mass = 120
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 3.5, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+
+            def Cube "Plate"
+            {
+                rel material:binding = </CraneRoot/Looks/Gray>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.3, 0, 0, 0), (0, 0.3, 0, 0), (0, 0, 0.09, 0), (0, 0, 0, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cube "CrossBar"
+            {
+                rel material:binding = </CraneRoot/Looks/Dark>
+                double size = 1
+                matrix4d xformOp:transform = ( (0.62, 0, 0, 0), (0, 0.1, 0, 0), (0, 0, 0.1, 0), (0, 0, 0.2, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "Bar0"
+            {
+                uniform token axis = "Z"
+                double height = 0.3
+                rel material:binding = </CraneRoot/Looks/Dark>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, -0.18, 0.1, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "Bar1"
+            {
+                uniform token axis = "Z"
+                double height = 0.3
+                rel material:binding = </CraneRoot/Looks/Dark>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0.18, 0.1, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+
+            def Cylinder "Magnet"
+            {
+                uniform token axis = "Z"
+                double height = 0.12
+                rel material:binding = </CraneRoot/Looks/Red>
+                double radius = 0.28
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, -0.18, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+
+                def Cylinder "Ring"
+                {
+                    uniform token axis = "Z"
+                    double height = 0.03
+                    rel material:binding = </CraneRoot/Looks/MagnetRing>
+                    double radius = 0.285
+                    matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, -0.045, 1) )
+                    uniform token[] xformOpOrder = ["xformOp:transform"]
+                }
+            }
+
+            def Capsule "CableStub"
+            {
+                double height = 0.25
+                rel material:binding = </CraneRoot/Looks/Dark>
+                double radius = 0.02
+                matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0.38, 1) )
+                uniform token[] xformOpOrder = ["xformOp:transform"]
+            }
+        }
+
+        def PhysicsPrismaticJoint "PortalTravelJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+        )
+        {
+            float drive:linear:physics:damping = 20000
+            float drive:linear:physics:maxForce = 50000
+            float drive:linear:physics:stiffness = 200000
+            float drive:linear:physics:targetPosition = 0
+            float drive:linear:physics:targetVelocity = 0
+            uniform token physics:axis = "Y"
+            rel physics:body0 = </CraneRoot/CraneArticulation/Base>
+            rel physics:body1 = </CraneRoot/CraneArticulation/Portal>
+            point3f physics:localPos0 = (9, 0, 8.4)
+            point3f physics:localPos1 = (9, 0, 8.4)
+            float physics:lowerLimit = -6.5
+            float physics:upperLimit = 6.5
+        }
+
+        def PhysicsPrismaticJoint "TrolleyTravelJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+        )
+        {
+            float drive:linear:physics:damping = 8000
+            float drive:linear:physics:maxForce = 20000
+            float drive:linear:physics:stiffness = 100000
+            float drive:linear:physics:targetPosition = 0
+            float drive:linear:physics:targetVelocity = 0
+            uniform token physics:axis = "X"
+            rel physics:body0 = </CraneRoot/CraneArticulation/Portal>
+            rel physics:body1 = </CraneRoot/CraneArticulation/Trolley>
+            point3f physics:localPos0 = (0, 0, 7.45)
+            point3f physics:localPos1 = (0, 0, 7.45)
+            float physics:lowerLimit = 0.8
+            float physics:upperLimit = 17.2
+        }
+
+        def PhysicsPrismaticJoint "HoistJoint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+        )
+        {
+            float drive:linear:physics:damping = 12000
+            float drive:linear:physics:maxForce = 15000
+            float drive:linear:physics:stiffness = 500000
+            float drive:linear:physics:targetPosition = 0
+            float drive:linear:physics:targetVelocity = 0
+            uniform token physics:axis = "Z"
+            rel physics:body0 = </CraneRoot/CraneArticulation/Trolley>
+            rel physics:body1 = </CraneRoot/CraneArticulation/Hook>
+            point3f physics:localPos0 = (0, 0, -3.95)
+            point3f physics:localPos1 = (0, 0, 0)
+            float physics:lowerLimit = -3.1
+            float physics:upperLimit = 3.5
+        }
+    }
+
+    def Capsule "Cable"
+    {
+        double height = 1
+        rel material:binding = </CraneRoot/Looks/Dark>
+        double radius = 0.02
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 5.3, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+}
+

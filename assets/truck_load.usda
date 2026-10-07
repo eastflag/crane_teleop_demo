@@ -1,0 +1,1434 @@
+#usda 1.0
+(
+    defaultPrim = "Truck"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def "Truck"
+{
+    def "Looks"
+    {
+        def Material "TruckBody"
+        {
+            token outputs:surface.connect = </Truck/Looks/TruckBody/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.66, 0.68, 0.71)
+                float inputs:metallic = 0.35
+                float inputs:roughness = 0.45
+                token outputs:surface
+            }
+        }
+
+        def Material "TruckDark"
+        {
+            token outputs:surface.connect = </Truck/Looks/TruckDark/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.13, 0.14, 0.16)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.6
+                token outputs:surface
+            }
+        }
+
+        def Material "TruckGlass"
+        {
+            token outputs:surface.connect = </Truck/Looks/TruckGlass/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.25, 0.35, 0.45)
+                float inputs:metallic = 0.5
+                float inputs:opacity = 0.7
+                float inputs:roughness = 0.1
+                token outputs:surface
+            }
+        }
+
+        def Material "TruckBed"
+        {
+            token outputs:surface.connect = </Truck/Looks/TruckBed/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.4, 0.28, 0.16)
+                float inputs:metallic = 0.25
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def Material "Rod1"
+        {
+            token outputs:surface.connect = </Truck/Looks/Rod1/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.48, 0.28, 0.14)
+                float inputs:metallic = 0.35
+                float inputs:roughness = 0.8
+                token outputs:surface
+            }
+        }
+
+        def Material "Rod2"
+        {
+            token outputs:surface.connect = </Truck/Looks/Rod2/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.55, 0.38, 0.2)
+                float inputs:metallic = 0.35
+                float inputs:roughness = 0.75
+                token outputs:surface
+            }
+        }
+
+        def Material "Rod3"
+        {
+            token outputs:surface.connect = </Truck/Looks/Rod3/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.38, 0.22, 0.12)
+                float inputs:metallic = 0.3
+                float inputs:roughness = 0.85
+                token outputs:surface
+            }
+        }
+
+        def Material "Bent"
+        {
+            token outputs:surface.connect = </Truck/Looks/Bent/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.35, 0.4, 0.47)
+                float inputs:metallic = 0.7
+                float inputs:roughness = 0.45
+                token outputs:surface
+            }
+        }
+
+        def Material "Bumper"
+        {
+            token outputs:surface.connect = </Truck/Looks/Bumper/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.55, 0.57, 0.6)
+                float inputs:metallic = 0.6
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "HeadLight"
+        {
+            token outputs:surface.connect = </Truck/Looks/HeadLight/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.95, 0.93, 0.8)
+                color3f inputs:emissiveColor = (0.95, 0.93, 0.75)
+                float inputs:emissiveIntensity = 3
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "TailLight"
+        {
+            token outputs:surface.connect = </Truck/Looks/TailLight/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.7, 0.08, 0.06)
+                color3f inputs:emissiveColor = (0.8, 0.1, 0.08)
+                float inputs:emissiveIntensity = 1.5
+                float inputs:metallic = 0
+                float inputs:roughness = 0.5
+                token outputs:surface
+            }
+        }
+
+        def Material "Wheel"
+        {
+            token outputs:surface.connect = </Truck/Looks/Wheel/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.07, 0.07, 0.08)
+                float inputs:metallic = 0
+                float inputs:roughness = 0.95
+                token outputs:surface
+            }
+        }
+
+        def Material "WheelHub"
+        {
+            token outputs:surface.connect = </Truck/Looks/WheelHub/Shader.outputs:surface>
+
+            def Shader "Shader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (0.6, 0.62, 0.65)
+                float inputs:metallic = 0.85
+                float inputs:roughness = 0.35
+                token outputs:surface
+            }
+        }
+    }
+
+    def Cube "Frame1"
+    {
+        rel material:binding = </Truck/Looks/TruckDark>
+        double size = 1
+        matrix4d xformOp:transform = ( (5.4, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.18, 0), (5, -2.05, 0.62, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "Frame2"
+    {
+        rel material:binding = </Truck/Looks/TruckDark>
+        double size = 1
+        matrix4d xformOp:transform = ( (5.4, 0, 0, 0), (0, 0.12, 0, 0), (0, 0, 0.18, 0), (5, -2.95, 0.62, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "Cab"
+    {
+        rel material:binding = </Truck/Looks/TruckBody>
+        double size = 1
+        matrix4d xformOp:transform = ( (1.55, 0, 0, 0), (0, 2.05, 0, 0), (0, 0, 1.45, 0), (7.6, -2.5, 1.35, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "CabGlass"
+    {
+        rel material:binding = </Truck/Looks/TruckGlass>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.06, 0, 0, 0), (0, 1.85, 0, 0), (0, 0, 0.65, 0), (6.84, -2.5, 1.62, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "CabDeflector"
+    {
+        rel material:binding = </Truck/Looks/TruckBody>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.8330565911650554, 0, 0.168868931175802, 0), (0, 1.85, 0, 0), (-0.06953426577827142, 0, 0.34302330224443456, 0), (7.949999999999999, -2.5, 2.25, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "Bumper"
+    {
+        rel material:binding = </Truck/Looks/Bumper>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.18, 0, 0, 0), (0, 2.15, 0, 0), (0, 0, 0.5, 0), (8.45, -2.5, 0.55, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "HeadLight0"
+    {
+        rel material:binding = </Truck/Looks/HeadLight>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.05, 0, 0, 0), (0, 0.28, 0, 0), (0, 0, 0.16, 0), (8.53, -3.25, 0.72, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "HeadLight1"
+    {
+        rel material:binding = </Truck/Looks/HeadLight>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.05, 0, 0, 0), (0, 0.28, 0, 0), (0, 0, 0.16, 0), (8.53, -1.75, 0.72, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Exhaust"
+    {
+        uniform token axis = "Z"
+        double height = 1.8
+        rel material:binding = </Truck/Looks/TruckDark>
+        double radius = 0.06
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (6.75, -1.6, 1.4, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "FuelTank0"
+    {
+        uniform token axis = "Z"
+        double height = 0.95
+        rel material:binding = </Truck/Looks/TruckBody>
+        double radius = 0.24
+        matrix4d xformOp:transform = ( (2.220446049250313e-16, 0, -1, 0), (0, 1, 0, 0), (1, 0, 2.220446049250313e-16, 0), (7, -3.2800000000000002, 0.55, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "FuelTank1"
+    {
+        uniform token axis = "Z"
+        double height = 0.95
+        rel material:binding = </Truck/Looks/TruckBody>
+        double radius = 0.24
+        matrix4d xformOp:transform = ( (2.220446049250313e-16, 0, -1, 0), (0, 1, 0, 0), (1, 0, 2.220446049250313e-16, 0), (7, -1.72, 0.55, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BedFloor" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Truck/Looks/TruckBed>
+        double size = 1
+        matrix4d xformOp:transform = ( (3.6, 0, 0, 0), (0, 1.9, 0, 0), (0, 0, 0.12, 0), (5, -2.5, 0.8400000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BedRailL" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Truck/Looks/TruckBed>
+        double size = 1
+        matrix4d xformOp:transform = ( (3.6, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.34, 0), (5, -1.575, 1.07, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BedRailR" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Truck/Looks/TruckBed>
+        double size = 1
+        matrix4d xformOp:transform = ( (3.6, 0, 0, 0), (0, 0.05, 0, 0), (0, 0, 0.34, 0), (5, -3.425, 1.07, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BedTail" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Truck/Looks/TruckBed>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.05, 0, 0, 0), (0, 1.9, 0, 0), (0, 0, 0.34, 0), (3.225, -2.5, 1.07, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "BedHead" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        rel material:binding = </Truck/Looks/TruckBed>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.05, 0, 0, 0), (0, 1.9, 0, 0), (0, 0, 0.34, 0), (6.775, -2.5, 1.07, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "TailLight0"
+    {
+        rel material:binding = </Truck/Looks/TailLight>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.04, 0, 0, 0), (0, 0.2, 0, 0), (0, 0, 0.1, 0), (3.19, -3.2, 1.1, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cube "TailLight1"
+    {
+        rel material:binding = </Truck/Looks/TailLight>
+        double size = 1
+        matrix4d xformOp:transform = ( (0.04, 0, 0, 0), (0, 0.2, 0, 0), (0, 0, 0.1, 0), (3.19, -1.8, 1.1, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Cylinder "Wheel00"
+    {
+        uniform token axis = "Z"
+        double height = 0.32
+        rel material:binding = </Truck/Looks/Wheel>
+        double radius = 0.42
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (7.3, -3.32, 0.42, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Hub"
+        {
+            uniform token axis = "Z"
+            double height = 0.34
+            rel material:binding = </Truck/Looks/WheelHub>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (0, 0, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Wheel01"
+    {
+        uniform token axis = "Z"
+        double height = 0.32
+        rel material:binding = </Truck/Looks/Wheel>
+        double radius = 0.42
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (7.3, -1.6800000000000002, 0.42, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Hub"
+        {
+            uniform token axis = "Z"
+            double height = 0.34
+            rel material:binding = </Truck/Looks/WheelHub>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (0, 0, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Wheel10"
+    {
+        uniform token axis = "Z"
+        double height = 0.32
+        rel material:binding = </Truck/Looks/Wheel>
+        double radius = 0.42
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.5, -3.32, 0.42, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Hub"
+        {
+            uniform token axis = "Z"
+            double height = 0.34
+            rel material:binding = </Truck/Looks/WheelHub>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (0, 0, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Wheel11"
+    {
+        uniform token axis = "Z"
+        double height = 0.32
+        rel material:binding = </Truck/Looks/Wheel>
+        double radius = 0.42
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.5, -1.6800000000000002, 0.42, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Hub"
+        {
+            uniform token axis = "Z"
+            double height = 0.34
+            rel material:binding = </Truck/Looks/WheelHub>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (0, 0, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Wheel20"
+    {
+        uniform token axis = "Z"
+        double height = 0.32
+        rel material:binding = </Truck/Looks/Wheel>
+        double radius = 0.42
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (2.5, -3.32, 0.42, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Hub"
+        {
+            uniform token axis = "Z"
+            double height = 0.34
+            rel material:binding = </Truck/Looks/WheelHub>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (0, 0, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Cylinder "Wheel21"
+    {
+        uniform token axis = "Z"
+        double height = 0.32
+        rel material:binding = </Truck/Looks/Wheel>
+        double radius = 0.42
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (2.5, -1.6800000000000002, 0.42, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Cylinder "Hub"
+        {
+            uniform token axis = "Z"
+            double height = 0.34
+            rel material:binding = </Truck/Looks/WheelHub>
+            double radius = 0.16
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (0, 0, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Capsule "Mound0_L1_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.857320070169889, -3.1538411842052705, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8503678134650117, -2.9742839723982373, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8392943368571597, -2.7823326223842897, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.84780335693008, -2.599094496121951, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8391701850574522, -2.390016477698699, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8536568586781117, -2.2153097959666033, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8484387412534034, -2.010516276134815, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L1_7" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8595442625946053, -1.8231153792478252, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.847417711944035, -3.07, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.849832552449562, -2.88, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.854240544443946, -2.69, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8394592651109933, -2.5, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8513343068060975, -2.3099999999999996, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.8445148385087227, -2.12, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L2_6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.859111628160038, -1.9299999999999997, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L3_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.85, -2.88, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L3_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.85, -2.5, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound0_L3_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (3.85, -2.12, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Xform "Mound0_Bent0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.4304267861886293, -0.9026254936192132, 0, 0), (0.9026254936192132, -0.4304267861886293, 0, 0), (0, 0, 1, 0), (4.035044251163752, -3, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9308172360993012, -0.36548498324891254, 0), (0, 0.36548498324891254, -0.9308172360993012, 0), (-0, 0.08543211483443333, -0.21757852893821164, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound0_Bent1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.7918780501978645, -0.6106792559231305, 0, 0), (0.6106792559231305, 0.7918780501978645, 0, 0), (0, 0, 1, 0), (4.036097734012167, -2.66, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.8831191490704873, -0.46914877016253453, 0), (0, 0.46914877016253453, -0.8831191490704873, 0), (-0, 0.10966352502549241, -0.2064291010952264, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound0_Bent2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.26389991398503465, -0.9645500688915492, 0, 0), (0.9645500688915492, -0.26389991398503465, 0, 0), (0, 0, 1, 0), (3.6005998417934144, -2.32, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9420302136368652, -0.33552805634593835, 0), (0, 0.33552805634593835, -0.9420302136368652, 0), (-0, 0.07842968317086313, -0.2201995624376171, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound0_Bent3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.921864090235504, 0.3875133534915494, 0, 0), (-0.3875133534915494, -0.921864090235504, 0, 0), (0, 0, 1, 0), (3.7016264180572827, -1.98, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7765918329598878, -0.6300040674313155, 0), (0, 0.6300040674313155, -0.7765918329598878, 0), (-0, 0.14726345076207006, -0.18152834095437376, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Capsule "Mound1_L1_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.995798623469814, -3.1538756933794594, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.995594850097707, -2.977019228329329, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.00476428776764, -2.781029117984793, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.007174547783115, -2.5952896708538766, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.995674831703639, -2.3940024094789014, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.000169635334162, -2.2098722999715688, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.993668659081501, -2.0297092743927236, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L1_7" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.010397373605411, -1.8382834841782634, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.008278243235367, -3.07, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.996829137733877, -2.88, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.0108245515486995, -2.69, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.997586206277892, -2.5, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.010474609484208, -2.3099999999999996, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5.0013478346128135, -2.12, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L2_6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (4.993763247879267, -1.9299999999999997, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L3_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5, -2.88, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L3_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5, -2.5, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound1_L3_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (5, -2.12, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Xform "Mound1_Bent0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.4574037489293057, -0.8892591357222128, 0, 0), (0.8892591357222128, -0.4574037489293057, 0, 0), (0, 0, 1, 0), (5.092102606192299, -3, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.6613352491483215, -0.7500904533680777, 0), (0, 0.7500904533680777, -0.6613352491483215, 0), (-0, 0.17533364347478808, -0.1545871144884201, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound1_Bent1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.17571241132812676, 0.9844415414361867, 0, 0), (-0.9844415414361867, 0.17571241132812676, 0, 0), (0, 0, 1, 0), (5.070470070740655, -2.66, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.7937292477552591, -0.6082712234339799, 0), (0, 0.6082712234339799, -0.7937292477552591, 0), (-0, 0.14218339847769285, -0.18553421166279177, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound1_Bent2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.35510665449434087, -0.9348257933614353, 0, 0), (0.9348257933614353, -0.35510665449434087, 0, 0), (0, 0, 1, 0), (5.067693399945355, -2.32, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9194305630924384, -0.3932523867079788, 0), (0, 0.3932523867079788, -0.9194305630924384, 0), (-0, 0.0919227453929901, -0.21491689412285747, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound1_Bent3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.30017983072220367, -0.953882628643372, 0, 0), (0.953882628643372, 0.30017983072220367, 0, 0), (0, 0, 1, 0), (4.847012738003523, -1.98, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.8294005960038118, -0.5586543218740206, 0), (0, 0.5586543218740206, -0.8294005960038118, 0), (-0, 0.1305854477380524, -0.19387238931589096, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Capsule "Mound2_L1_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.147371013931146, -3.1540413222780597, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.14713140889544, -2.965734842717511, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.152700427299968, -2.7711799804951482, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.161800241207765, -2.5855264749069837, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.157412251416832, -2.406942699537087, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.155109366301598, -2.2030475123949094, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.147629417951824, -2.018934999204129, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L1_7" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.149507706042261, -1.8208295400040126, 0.917, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.145614668166641, -3.07, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.147650028646507, -2.88, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.138022074938661, -2.69, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.148084428832635, -2.5, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_4" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.153154466547175, -2.3099999999999996, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_5" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.16043906626048, -2.12, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L2_6" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.160168238034186, -1.9299999999999997, 0.9510000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L3_0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod3>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.15, -2.88, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L3_1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod1>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.15, -2.5, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Capsule "Mound2_L3_2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double height = 1.166
+        rel material:binding = </Truck/Looks/Rod2>
+        double radius = 0.017
+        matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, 1, 0), (0, -1, 2.220446049250313e-16, 0), (6.15, -2.12, 0.985, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def Xform "Mound2_Bent0" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.9975518227004624, -0.06993111630015077, 0, 0), (0.06993111630015077, 0.9975518227004624, 0, 0), (0, 0, 1, 0), (5.99383747011726, -3, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.8481311866639838, -0.5297862684214673, 0), (0, 0.5297862684214673, -0.8481311866639838, 0), (-0, 0.12383754024351792, -0.19825066488270623, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound2_Bent1" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.5502852520220727, 0.8349767310572217, 0, 0), (-0.8349767310572217, 0.5502852520220727, 0, 0), (0, 0, 1, 0), (6.10254932643058, -2.66, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.6173079571915734, -0.786721606407227, 0), (0, 0.786721606407227, -0.6173079571915734, 0), (-0, 0.18389617549768925, -0.14429573499353016, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound2_Bent2" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (0.6278817636769335, -0.7783087374827187, 0, 0), (0.7783087374827187, 0.6278817636769335, 0, 0), (0, 0, 1, 0), (6.314399035488261, -2.32, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.9284289170327775, -0.37151008871542684, 0), (0, 0.37151008871542684, -0.9284289170327775, 0), (-0, 0.08684048323723118, -0.21702025935641164, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+
+    def Xform "Mound2_Bent3" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        matrix4d xformOp:transform = ( (-0.9855314229913004, -0.16949281488234957, 0, 0), (0.16949281488234957, -0.9855314229913004, 0, 0), (0, 0, 1, 0), (6.029070748458153, -1.98, 0.995, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+
+        def Capsule "SegA" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.518
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, 2.220446049250313e-16, -1, 0), (0, 1, 2.220446049250313e-16, 0), (0, 0.275, 0, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+
+        def Capsule "SegB" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            double height = 0.4355
+            rel material:binding = </Truck/Looks/Bent>
+            double radius = 0.016
+            matrix4d xformOp:transform = ( (1, 0, 0, 0), (0, -0.910189001022611, -0.41419317041383164, 0), (0, 0.41419317041383164, -0.910189001022611, 0), (-0, 0.0968176535842331, -0.21275667898903536, 1) )
+            uniform token[] xformOpOrder = ["xformOp:transform"]
+        }
+    }
+}
+
